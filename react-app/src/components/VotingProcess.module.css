@@ -1,0 +1,30 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #d0e0e0;
+    padding: 10px;
+    margin: 20px;
+}
+
+.gridItem {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.title {
+    display: inline;
+    color: red;
+    /* border: solid black 1px; */
+}
+
+.button {
+    color: white;
+    background-color: #f1356d;
+    border-radius: 8px;
+    font-size: 20px;
+    width: 100px;
+    padding: 2px;
+}
