@@ -9,8 +9,12 @@ module.exports = async function (deployer) {
   const depth = 20;
   const externalNullifier = genExternalNullifier('test-voting');
 
+  await deployer.deploy(PoseidonT3);
+  await deployer.deploy(PoseidonT6);
+
   deployer.link(PoseidonT3, Semaphore);
   deployer.link(PoseidonT6, Semaphore);
   const semaphore = await deployer.deploy(Semaphore, depth, externalNullifier);
+  console.log("Contract (semaphore) address:", semaphore.address)
   deployer.deploy(SemaphoreClient, semaphore.address);
 };

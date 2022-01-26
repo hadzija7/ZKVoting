@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@harmony-js/core": "^0.1.57",
+    "@harmony-js/utils": "^0.1.56",
+    "dotenv": "^14.3.2",
+    "ethers": "^5.5.3",
+    "ganache-cli": "^6.12.2",
+    "tslib": "^2.3.1"
+  }
+}

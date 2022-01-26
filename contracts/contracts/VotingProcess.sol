@@ -2,6 +2,8 @@
 pragma solidity ^0.8.0;
 
 import { SemaphoreClient } from './SemaphoreClient.sol';
+import { Semaphore } from './Semaphore.sol';
+
 
 contract VotingProcess is SemaphoreClient {
     uint id;
@@ -14,10 +16,11 @@ contract VotingProcess is SemaphoreClient {
 
     constructor(
         uint _id,
-        string _name,
-        string _description,
-        string[] _proposals
-    ){
+        string memory _name,
+        string memory _description,
+        string[] memory _proposals,
+        Semaphore _semaphore
+    ) SemaphoreClient(_semaphore) {
         id = _id;
         name = _name;
         description = _description;
@@ -25,7 +28,7 @@ contract VotingProcess is SemaphoreClient {
     }
 
     function vote(
-        string signal,
+        string memory signal,
         bytes memory _signal,
         uint256[8] memory _proof,
         uint256 _root,
@@ -35,7 +38,8 @@ contract VotingProcess is SemaphoreClient {
         //check if signal matches one of proposals
         bool exist = false;
         for(uint i = 0; i < proposals.length; i ++){
-            if (signal == proposals[i]){
+            string memory proposal = proposals[i];
+            if (keccak256(abi.encodePacked((signal))) == keccak256(abi.encodePacked((proposal)))){
                 exist = true;
                 break;
             }
