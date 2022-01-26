@@ -33,7 +33,6 @@ const getSemaphoreClientContract = async (context) => {
     )
 }
 
-
 export {
     getSemaphoreClientContract,
     getSemaphoreContract,
