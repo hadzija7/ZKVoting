@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import VotingProcess from './VotingProcess'
 
-
 const Home = () => {
     const [name, setName] = useState('Josh')
 
