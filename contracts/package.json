@@ -5,6 +5,7 @@
     "dotenv": "^14.3.2",
     "ethers": "^5.5.3",
     "ganache-cli": "^6.12.2",
+    "shelljs": "^0.8.5",
     "tslib": "^2.3.1"
   }
 }
