@@ -1,0 +1,11 @@
+.createProcess{
+    max-width: 50%;
+    margin: auto;
+}
+
+.createProcess div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}

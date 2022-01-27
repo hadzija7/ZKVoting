@@ -18,12 +18,9 @@ const Home = () => {
 
     return (  
         <div className="home">
-            <h1>Public voting</h1>
-            
             {processes.map((process) => (
                 <VotingProcess className="VotingProcess" process = {process}/>
             ))}
-
         </div>
     );
 

@@ -1,9 +1,10 @@
 import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.css';
+
 import Home from './components/Home';
 import VotingPage from './components/VotingPage';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
-import 'bootstrap/dist/css/bootstrap.css';
+import CreateProcess from './components/CreateProcessPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/voting/:id" element={<VotingPage/>} />
+            <Route path="/createProcess" element={<CreateProcess/>} />
           </Routes>
 		    </div>
       </div>

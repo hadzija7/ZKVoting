@@ -1,8 +1,5 @@
 import styles from './VotingProcess.module.css'
-import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
+import { Link } from 'react-router-dom';
 
 const VotingProcess = (props) => {
     const process = props.process;
@@ -10,23 +7,21 @@ const VotingProcess = (props) => {
     console.log(props, process);
 
     return (  
-        <Container>
-            <Row>
-                <Col>
-                    <Row >
-                        <h2 className={styles.title}>{process.name}</h2>
-                        <p>{process.description}</p>
-                    </Row>
-                </Col>
-                <Col>
-                    <Row>
-                        <Button  
-                        variant="primary"
-                        >Vote</Button>
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+        <div className={styles.votingProcess}>
+            <div className={styles.votingChild}>
+                <div style={{textAlign: "left"}}>
+                    <h2 className={styles.title}>{process.name}</h2>
+                </div>
+                <div style={{textAlign: "left", position: "relative", left: "1em"}}>
+                    <p>{process.description}</p>
+                </div>
+            </div>
+            <div className={styles.votingChild}
+                style={{display: "flex", alignItems: "center", justifyContent: "center"}}
+            >
+                <Link to="/voting/1" className={styles.votingButton}>Vote</Link>
+            </div>
+        </div>
     );
 }
  

@@ -1,16 +1,20 @@
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
 
-import ConnectWallet from './ConnectWallet'
+import ConnectWallet from './ConnectWallet';
 
 const Navbar = () => {
     return (  
         <nav className="navbar">
-            <Container>
-                <Col md="8"><h1>OneVote</h1></Col>
-                <Col md="3"><a href="/">Home</a></Col>
-                <Col md="1"><ConnectWallet /></Col>
-            </Container>
+            <h1>OneVote</h1>
+            <div className="links">
+                <Link className="link" to="/">Home</Link>
+                <Link className="link" to="/createProcess">Create voting process</Link>
+            </div>
+            <div>
+                <ConnectWallet />
+            </div>
         </nav>
     );
 }

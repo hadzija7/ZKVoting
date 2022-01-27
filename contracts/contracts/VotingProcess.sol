@@ -54,8 +54,6 @@ contract VotingProcess is SemaphoreClient {
             _nullifiersHash,
             _externalNullifier
         );
-
-
     }
 
 

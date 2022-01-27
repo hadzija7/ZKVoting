@@ -49,9 +49,18 @@ const ConnectWallet = () => {
         )
     }
 
+    const showAccount = () => {
+        const firstPart = currentAccount.substring(0,4);
+        const lastPart = currentAccount.substring(currentAccount.length - 4);
+        const string = firstPart + "..." + lastPart;
+        return (
+            string
+        )
+    }
+
     return (  
-        <div className="connectWallet">
-            {currentAccount ? currentAccount : connectWalletButton()}
+        <div className="connectWallet" style={{color: "grey"}}>
+            {currentAccount ? showAccount() : connectWalletButton()}
         </div>
     );
 }
