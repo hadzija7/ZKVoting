@@ -2,8 +2,8 @@ import styles from './VotingProcess.module.css'
 import { Link } from 'react-router-dom';
 
 const VotingProcess = (props) => {
-    const process = props.process;
-
+    const process = props.votingProcess;
+    
     return (  
         <div className={styles.votingProcess}>
             <div className={styles.votingChild}>
