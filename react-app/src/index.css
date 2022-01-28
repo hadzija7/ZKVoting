@@ -53,3 +53,7 @@
   text-align:center;
   transition: all 0.15s;
 }
+
+.voting-page {
+  font-size: calc(10px + 0.6vw);
+}

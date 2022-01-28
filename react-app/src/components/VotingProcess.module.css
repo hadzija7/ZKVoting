@@ -23,6 +23,7 @@
     height: 200px;
     margin: auto;
     margin-bottom: 2em;
+    font-size: calc(10px + 0.6vw);
 }
 
 .votingChild {

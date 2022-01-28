@@ -45,4 +45,14 @@ contract OneVote {
         return returnProcesses;
     }
 
+    function getProcess(uint id) public view returns (ProcessDTO memory){
+        VotingProcess votingProcess = votingProcesses[id];
+        return ProcessDTO({
+            id: votingProcess.id(),
+            name: votingProcess.name(),
+            description: votingProcess.description(),
+            proposals: votingProcess.getProposals()
+        });
+    }
+
 }

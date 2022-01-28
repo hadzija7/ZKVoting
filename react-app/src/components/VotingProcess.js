@@ -1,8 +1,9 @@
 import styles from './VotingProcess.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const VotingProcess = (props) => {
     const process = props.votingProcess;
+    const { id } = useParams();
     
     return (  
         <div className={styles.votingProcess}>
@@ -17,7 +18,7 @@ const VotingProcess = (props) => {
             <div className={styles.votingChild}
                 style={{display: "flex", alignItems: "center", justifyContent: "center"}}
             >
-                <Link to="/voting/1" className={styles.votingButton}>Vote</Link>
+                <Link to={`/voting/${process.id}`} className={styles.votingButton}>Vote</Link>
             </div>
         </div>
     );

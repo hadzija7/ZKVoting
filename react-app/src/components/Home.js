@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import VotingProcess from './VotingProcess';
 
-import { getVotingProcess } from '../web3/contracts';
+import { getVotingProcesses } from '../web3/contracts';
 
 const Home = () => {
     const [votingProcesses, setVotingProcesses] = useState(
@@ -16,7 +16,7 @@ const Home = () => {
     // ])
 
     useEffect(() => {
-        getVotingProcess().then(
+        getVotingProcesses().then(
             res => {
                 setVotingProcesses(res);
             }

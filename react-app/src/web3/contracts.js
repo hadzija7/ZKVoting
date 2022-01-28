@@ -16,7 +16,7 @@ const votingProcessBytecode = require('@/../../bytecode/VotingProcess.json')
 
 const semaphoreAddress = "0x4e5CdE8dD44B72a0bC742e20f8d5290E144C921a";
 const testAddress = "0x54A0239E6f13d1D3ac77a93Ab8dEa49a4b7c40b4";
-const oneVoteAddress = "0x24d1f4E8438aD5FAEB83bC099C8Be549275E07D9";
+const oneVoteAddress = "0x0BD1F114ca2307fA5919FAa76349688Bd541c6E4";
 
 const deployVotingProcess = async () => {
     const { ethereum } = window;
@@ -65,7 +65,7 @@ const getTestContract = async () => {
     console.log("State: ", state);
 }
 
-const getVotingProcess = async () => {
+const getVotingProcesses = async () => {
     const { ethereum } = window;
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
@@ -73,6 +73,17 @@ const getVotingProcess = async () => {
     const votingProcesses = await oneVoteContract.getProcesses();
     console.log("Voting processes: ", votingProcesses);
     return votingProcesses;
+}
+
+const getVotingProcess = async (id) => {
+    const { ethereum } = window;
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const oneVoteContract = new Contract(oneVoteAddress, oneVoteAbi, signer);
+    const votingProcess = await oneVoteContract.getProcess(id);
+    
+    console.log("Voting process: ", votingProcess);
+    return votingProcess;
 }
 
 // const getProviderAndSigner = async (context) => {
@@ -110,5 +121,6 @@ export {
     deployVotingProcess,
     deployTestContract,
     getTestContract,
+    getVotingProcesses,
     getVotingProcess
 }
