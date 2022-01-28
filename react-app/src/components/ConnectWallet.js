@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { useState } from 'react';
 

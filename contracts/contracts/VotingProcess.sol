@@ -6,13 +6,17 @@ import { Semaphore } from './Semaphore.sol';
 
 
 contract VotingProcess is SemaphoreClient {
-    uint id;
-    string name;
-    string description;
-    string[] proposals;
+    uint public id;
+    string public name;
+    string public description;
+    string[] public proposals;
 
     mapping (string => uint) votesPerProposal;
     string winningProposal;
+
+    function getProposals() view public returns (string[] memory){
+        return proposals;
+    }
 
     constructor(
         uint _id,

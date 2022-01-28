@@ -1,8 +1,17 @@
-import { useState } from 'react'
-import VotingProcess from './VotingProcess'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import VotingProcess from './VotingProcess';
+
+import { getVotingProcess } from '../web3/contracts';
 
 const Home = () => {
-    const [name, setName] = useState('Josh')
+    const [votingProcesses, setVotingProcesses] = useState(
+        [
+            {"name": "Process1", "description": "Speech right", "id": 1},
+            {"name": "Process2", "description": "Human right", "id": 2},
+            {"name": "Process3", "description": "President election", "id": 3}
+        ]
+    );
 
     const [processes, setProcesses] = useState([
         {"name": "Process1", "description": "Speech right", "id": 1},
@@ -10,15 +19,14 @@ const Home = () => {
         {"name": "Process3", "description": "President election", "id": 3}
     ])
 
-    const handleClick = (name) => {
-        console.log("Clicked on the button " + name);
-        setName('Alex')
-    }
-
+    useEffect(() => {
+        const processes = getVotingProcess();
+        setVotingProcesses(processes);
+    })
 
     return (  
         <div className="home">
-            {processes.map((process) => (
+            {votingProcesses.map((process) => (
                 <VotingProcess className="VotingProcess" process = {process}/>
             ))}
         </div>

@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 const VotingProcess = (props) => {
     const process = props.process;
 
-    console.log(props, process);
-
     return (  
         <div className={styles.votingProcess}>
             <div className={styles.votingChild}>

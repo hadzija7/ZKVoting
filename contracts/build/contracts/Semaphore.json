@@ -38763,10 +38763,196 @@
       },
       "address": "0xa9b110F0B76A00272810140eD26Bfc3657459716",
       "transactionHash": "0xf8c73500b968fbd5dc5d7f636ed62dc24cd71fb06a841d3a9af30c4e1facad39"
+    },
+    "1643299601998": {
+      "events": {
+        "0xd1ca56647596090d70fa8d49bcc376b97248314e3f204c491333b3440405f589": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            }
+          ],
+          "name": "ExternalNullifierAdd",
+          "type": "event"
+        },
+        "0xb8d2b8a2b352df7f139810483b3c80fc3a4a88711c90bdb7180f1030b7f49acf": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            },
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            }
+          ],
+          "name": "ExternalNullifierChangeStatus",
+          "type": "event"
+        },
+        "0xe6f49fa84abd31919f446b22a52bb3ceae774b4b87f062f022fec45c46f4f458": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leaf",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leafIndex",
+              "type": "uint256"
+            }
+          ],
+          "name": "LeafInsertion",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xfba91b9002bc7732a7bff1b44ee16a30ebaeb06d7921779034c6a6ab27e69c27": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "newPermission",
+              "type": "bool"
+            }
+          ],
+          "name": "PermissionSet",
+          "type": "event"
+        }
+      },
+      "links": {
+        "PoseidonT3": "0xbD6f07FEE82F083993ad493A1278a34cA2302200",
+        "PoseidonT6": "0xa0b0698bfFa53188dbA0CFea174F8CC47fE16dbf"
+      },
+      "address": "0x8DAE24aE3E66a04767AF5E0C1f674ec469dC17dC",
+      "transactionHash": "0xe291a33a3050f4ca63d9882bbec15f308bcba3c51100d3ccfd277c31664856b9"
+    },
+    "1643355699361": {
+      "events": {
+        "0xd1ca56647596090d70fa8d49bcc376b97248314e3f204c491333b3440405f589": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            }
+          ],
+          "name": "ExternalNullifierAdd",
+          "type": "event"
+        },
+        "0xb8d2b8a2b352df7f139810483b3c80fc3a4a88711c90bdb7180f1030b7f49acf": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            },
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            }
+          ],
+          "name": "ExternalNullifierChangeStatus",
+          "type": "event"
+        },
+        "0xe6f49fa84abd31919f446b22a52bb3ceae774b4b87f062f022fec45c46f4f458": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leaf",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leafIndex",
+              "type": "uint256"
+            }
+          ],
+          "name": "LeafInsertion",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xfba91b9002bc7732a7bff1b44ee16a30ebaeb06d7921779034c6a6ab27e69c27": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "newPermission",
+              "type": "bool"
+            }
+          ],
+          "name": "PermissionSet",
+          "type": "event"
+        }
+      },
+      "links": {
+        "PoseidonT3": "0x66914Cf114Ef3B0aC3b4bd9D34290fAC12703c39",
+        "PoseidonT6": "0x028cD6F04835bC89f2a4DEA2e9c4800a6efa1be0"
+      },
+      "address": "0x4c33C3c97FDCdf66bc79BA47c940fB4768f8b41f",
+      "transactionHash": "0x862b505c2a59afda52434538fdc4dc4ef3ab6a5287f89e0475dfeee7345bfac7"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-26T18:10:29.950Z",
+  "updatedAt": "2022-01-28T09:27:42.502Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
