@@ -1,20 +1,38 @@
-import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal';
+import Collapse from 'react-bootstrap/Collapse';
+import Spinner from 'react-bootstrap/Spinner';
 import styles from './CreateProcessPage.module.css';
 
 //web3 imports
 import { deployVotingProcess, deployTestContract, getTestContract } from '../web3/contracts'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const CreateProcess = () => {
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [proposals, setProposals] = useState('');
+    const [pending, setPending] = useState(false);
 
-    const createProcess = (e) => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false);
+        navigate('/');
+    }
+    const [open, setOpen] = useState(false);
+    const [transactionResult, setTransactionResult] = useState(null);
+
+    const refValue = useRef(false);
+    
+
+    
+    const createProcess = async (e) => {
         e.preventDefault();
+        console.log("name: ", name);
         //format proposals
         let proposalArray = formatProposals(proposals);
         //check form inputs
@@ -22,10 +40,16 @@ const CreateProcess = () => {
             window.alert("Form is not valid");
             return;
         }
+        setPending(true);
+        refValue.current = true;
         //deploy new process contract
-        deployVotingProcess(name, description, proposalArray).then(res => {
-            console.log(res);
-        });
+        const result = await deployVotingProcess(name, description, proposalArray);
+        setTransactionResult(result);
+
+        refValue.current = false;
+        setPending(false);
+        
+        setShow(true);
     }
 
     const isFormValid = () => {
@@ -40,11 +64,13 @@ const CreateProcess = () => {
         for(let i=0; i < proposals.length; i ++){
             array.push(proposals[i].trim());
         }
-
-        console.log("Proposals: ", array);
         return array;
     }
 
+
+    useEffect(() => {
+        // setPending(!pending);
+    }, [pending])
 
     return (  
         <div >
@@ -82,25 +108,43 @@ const CreateProcess = () => {
                 <div>
                     <button className="baseButton">Create new process</button>
                 </div>
+                {refValue.current == true && <div style={{marginTop: "2em"}}>
+                    <Spinner animation="border" />
+                </div>}
             </form>
-
-            {/* <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>Process name:</Form.Label>
-                    <Form.Control type="text" placeholder="Name of the voting process" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Process description:</Form.Label>
-                    <Form.Control type="text" placeholder="What is this process for?" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Proposals:</Form.Label>
-                    <Form.Control type="text" placeholder="Name of the voting process" />
-                </Form.Group>
-                <div>
-                    <div onClick={deployVotingProcess} className="baseButton">Create new process</div>
-                </div>
-            </Form> */}
+            <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Transaction result</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>
+                    Woohoo, you're reading this text in a modal!
+                </p>
+                <button
+                    className="baseButton"
+                    onClick={() => setOpen(!open)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open}
+                >
+                    Transaction details
+                </button>
+                { transactionResult && <Collapse in={open}>
+                    <div id="example-collapse-text" className={styles.collapse}>
+                        <div>
+                            <h4>transaction hash: </h4>
+                            <p>{transactionResult.hash}</p>
+                        </div>
+                        <div>
+                            <h4>nonce: </h4>
+                            <p>{transactionResult.nonce}</p>
+                        </div>
+                    </div>
+                </Collapse>}
+            </Modal.Body>
+            <Modal.Footer>
+                <button className="baseButton" onClick={handleClose}>Close</button>
+            </Modal.Footer>
+        </Modal>
         </div>
     );
 }

@@ -31,3 +31,13 @@
 .create button {
     margin-top: 2em;
 }
+
+.collapse {
+    margin-top: 2em;
+    padding: 1em;
+    border: 1px solid black;
+}
+.collapse p{
+    word-break: break-all;
+    white-space: normal;
+}

@@ -34,8 +34,11 @@ const deployVotingProcess = async (name, description, proposals) => {
     ];
 
     const oneVoteContract = new Contract(oneVoteAddress, oneVoteAbi, signer);
-    const result = await oneVoteContract.createVotingProcess(...args);
+    const result = await oneVoteContract.createVotingProcess(...args)
+    await result.wait()
+    
     console.log("Result of create voting process: ", result);
+    return result;
 }
 
 
