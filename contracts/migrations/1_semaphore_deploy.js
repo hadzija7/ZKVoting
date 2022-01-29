@@ -1,4 +1,5 @@
 const { genExternalNullifier } = require('../utils');
+const {ethers} = require('ethers');
 
 const Semaphore = artifacts.require("Semaphore");
 const SemaphoreClient = artifacts.require("SemaphoreClient");
@@ -9,7 +10,10 @@ module.exports = async function (deployer) {
   const depth = 20;
   const externalNullifier = genExternalNullifier('test-voting');
 
-  await deployer.deploy(PoseidonT3);
+  await deployer.deploy(PoseidonT3, {
+    gasPrice: 470000000000,//ethers.utils.parseUnits('30','gwei').toString(),
+    gasLimit: "2177302"
+  });
   await deployer.deploy(PoseidonT6);
 
   deployer.link(PoseidonT3, Semaphore);

@@ -38671,6 +38671,99 @@
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
   "networks": {
+    "1666700000": {
+      "events": {
+        "0xd1ca56647596090d70fa8d49bcc376b97248314e3f204c491333b3440405f589": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            }
+          ],
+          "name": "ExternalNullifierAdd",
+          "type": "event"
+        },
+        "0xb8d2b8a2b352df7f139810483b3c80fc3a4a88711c90bdb7180f1030b7f49acf": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint232",
+              "name": "externalNullifier",
+              "type": "uint232"
+            },
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            }
+          ],
+          "name": "ExternalNullifierChangeStatus",
+          "type": "event"
+        },
+        "0xe6f49fa84abd31919f446b22a52bb3ceae774b4b87f062f022fec45c46f4f458": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leaf",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "leafIndex",
+              "type": "uint256"
+            }
+          ],
+          "name": "LeafInsertion",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xfba91b9002bc7732a7bff1b44ee16a30ebaeb06d7921779034c6a6ab27e69c27": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "newPermission",
+              "type": "bool"
+            }
+          ],
+          "name": "PermissionSet",
+          "type": "event"
+        }
+      },
+      "links": {
+        "PoseidonT3": "0x77Af150835864c42f5EC5Eac090ad802e70d3A24",
+        "PoseidonT6": "0x450b17B4D3b67F94d167F833AbC9e99Db509B14A"
+      },
+      "address": "0x1dbd94a49a489cb04bbdF913467193fB41731a6B",
+      "transactionHash": "0xab8bdab193073c8aa91f4bd3d3391c022171df49375b2b9e5241ee2faecebe01"
+    },
     "1643217369555": {
       "events": {
         "0xd1ca56647596090d70fa8d49bcc376b97248314e3f204c491333b3440405f589": {
@@ -38952,7 +39045,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-28T14:37:45.773Z",
+  "updatedAt": "2022-01-29T07:01:34.031Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -7,7 +7,7 @@ import ConnectWallet from './ConnectWallet';
 const Navbar = () => {
     return (  
         <nav className="navbar">
-            <h1>OneVote</h1>
+            <Link className="link" to="/"><h1>OneVote</h1></Link>
             <div className="links">
                 <Link className="link" to="/">Home</Link>
                 <Link className="link" to="/createProcess">Create voting process</Link>

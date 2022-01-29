@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { TruffleProvider } = require("@harmony-js/core");
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 //Local
 const local_mnemonic = process.env.LOCAL_MNEMONIC;
@@ -42,7 +43,7 @@ module.exports = {
       },
     },
     testnet: {
-      network_id: "2", // Any network (default: none)
+      network_id: 1666700000, // Any network (default: none)
       provider: () => {
         const truffleProvider = new TruffleProvider(
           testnet_url,
@@ -54,6 +55,21 @@ module.exports = {
         truffleProvider.setSigner(newAcc);
         return truffleProvider;
       },
+      allowUnlimitedContractSize: true,
+    },
+    testnetHar: {
+      provider: () => {
+        if (!testnet_private_key.trim()) {
+          throw new Error(
+            'Please enter a private key with funds, you can use the default one'
+          );
+        }
+        return new HDWalletProvider({
+          privateKeys: [testnet_private_key],
+          providerOrUrl: 'https://api.s0.b.hmny.io',
+        });
+      },
+      network_id: 1666700000,
     },
     mainnet0: {
       network_id: "1", // Any network (default: none)

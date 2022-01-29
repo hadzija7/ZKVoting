@@ -9,17 +9,40 @@ import { useState } from 'react';
 
 const CreateProcess = () => {
 
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
-    const [proposals, setProposals] = useState();
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [proposals, setProposals] = useState('');
 
     const createProcess = (e) => {
-        //check form inputs
-
-        //deploy the new contract and save the address to OneVote contract
         e.preventDefault();
-        const process = {name, description};
-        console.log(process);
+        //format proposals
+        let proposalArray = formatProposals(proposals);
+        //check form inputs
+        if(!isFormValid()){
+            window.alert("Form is not valid");
+            return;
+        }
+        //deploy new process contract
+        deployVotingProcess(name, description, proposalArray).then(res => {
+            console.log(res);
+        });
+    }
+
+    const isFormValid = () => {
+        if(proposals < 2)
+            return false;
+        return true;
+    }
+
+    const formatProposals = (input) => {
+        let proposals = input.split(',');
+        let array = []
+        for(let i=0; i < proposals.length; i ++){
+            array.push(proposals[i].trim());
+        }
+
+        console.log("Proposals: ", array);
+        return array;
     }
 
 
@@ -28,7 +51,7 @@ const CreateProcess = () => {
             <div className={styles.createProcess}>
                 <h1>Create new voting process</h1>
             </div>
-            <form className={styles.create}>
+            <form onSubmit={createProcess} className={styles.create}>
                 <div>
                     <label>Process name:</label>
                     <input 
@@ -57,7 +80,7 @@ const CreateProcess = () => {
                     />
                 </div>
                 <div>
-                    <button onClick={createProcess} className="baseButton">Create new process</button>
+                    <button className="baseButton">Create new process</button>
                 </div>
             </form>
 

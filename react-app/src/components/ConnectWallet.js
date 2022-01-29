@@ -45,7 +45,7 @@ const ConnectWallet = () => {
 
     const connectWalletButton = () => {
         return (
-            <Button onClick={connectWalletHandler}>Connect Wallet</Button>
+            <button className="baseButton" onClick={connectWalletHandler}>Connect Wallet</button>
         )
     }
 
@@ -54,7 +54,7 @@ const ConnectWallet = () => {
         const lastPart = currentAccount.substring(currentAccount.length - 4);
         const string = firstPart + "..." + lastPart;
         return (
-            string
+            <label onClick={() => navigator.clipboard.writeText(currentAccount)} style={{userSelect:"none", cursor:"pointer"}}>{string}</label>
         )
     }
 
