@@ -1,10 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVotingProcess } from '../web3/contracts';
+import { getVotingProcess, getOneVoteContract } from '../web3/contracts';
 
 import styles from './VotingPage.module.css';
 
 import {ethers} from 'ethers';
+
+import {
+    Identity,
+    genIdentity,
+    genIdentityCommitment,
+    genCircuit,
+    serialiseIdentity,
+	genWitness,
+    genExternalNullifier,
+    genProof,
+    genPublicSignals,
+    genBroadcastSignalParams,
+} from 'libsemaphore';
+
+import {
+    initStorage,
+    storeId,
+    retrieveId,
+    hasId,
+} from '../web3/semaphoreStorage';
 
 const VotingPage = () => {
 
@@ -15,6 +35,7 @@ const VotingPage = () => {
 
     const [votingProcess, setVotingProcess] = useState(null);
     const [vote, setVote] = useState('');
+    const [proofStatus, setProofStatus] = useState('');
 
     useEffect(() => {
         getVotingProcess(id).then((result) => {
@@ -30,17 +51,35 @@ const VotingPage = () => {
     }
 
     const handleVoteClick = async () => {
-        console.log('Downloading circuit from', circuitUrl)
+        //get checked radio button
+        var radios = document.getElementsByName('vote');
+        
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                console.log("Selected vote: ", radios[i].value);
+                setVote(radios[i].value);
+                // only one radio can be logically checked, don't check the rest
+                break;
+            }
+        }
+        
+        const signalAsHex = ethers.utils.hexlify(
+            ethers.utils.toUtf8Bytes(vote),
+        )
 
+        const oneVoteContract = await getOneVoteContract();
+
+        setProofStatus('Downloading leaves')
+        const leaves = await oneVoteContract.getIdentityCommitments()
+        console.log('Leaves:', leaves)
+
+        setProofStatus('Downloading circuit')
         const cirDef = await (await fetchWithoutCache(circuitUrl)).json() 
         console.log("Downloaded circuit: ", cirDef);
-        // const circuit = genCircuit(cirDef)
-        
+        const circuit = genCircuit(cirDef)
+        console.log("Generated circuit: ", circuit);
 
-        console.log('Downloading proving key from', provingKeyUrl)
-        // const provingKey = new Uint8Array(
-        //     await (await fetch(provingKeyUrl)).arrayBuffer()
-        // )
+        setProofStatus('Downloading proving key')
         const toBuffer = function(ab) {
             const buf = Buffer.alloc(ab.byteLength);
             const view = new Uint8Array(ab);
@@ -51,6 +90,38 @@ const VotingPage = () => {
         }
         const provingKey = toBuffer((await (await fetch(provingKeyUrl)).arrayBuffer()))
         console.log("Proving key: ", provingKey);
+
+        setProofStatus('Generating witness')
+        const result = await genWitness(
+			vote,
+			circuit,
+			retrieveId(),
+			leaves,
+			20,//config.chain.semaphoreTreeDepth,
+			id,
+        )
+        
+        const witness = result.witness
+        console.log("Witness: ", witness);
+
+        setProofStatus('Generating proof')
+        const proof = await genProof(witness, provingKey)
+        console.log('Generated proof: ', proof);
+
+        setProofStatus('Voting');
+        const publicSignals = genPublicSignals(witness, circuit);
+        const params = genBroadcastSignalParams(result, proof, publicSignals);
+        const tx = await oneVoteContract.vote(
+            ethers.utils.toUtf8Bytes(vote),
+            params.proof,
+            params.root,
+            params.nullifiersHash,
+			id,
+			{ gasLimit: 1000000 }
+        )
+
+        const receipt = await tx.wait()
+        console.log("Voting result: ", receipt);
     }
 
     return (  
@@ -68,7 +139,7 @@ const VotingPage = () => {
                             {console.log(votingProcess.proposals)}
                         {votingProcess.proposals.map( (proposal) => (
                             <div key={proposal}>
-                                <input value={proposal} type="radio" name="vote"/>
+                                <input value={proposal} type="radio" name="vote" />
                                 {ethers.utils.toUtf8String(proposal)}
                             </div>
                         ))}

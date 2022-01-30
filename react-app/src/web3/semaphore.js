@@ -50,36 +50,6 @@ const getExternalNullifiers = async (semaphoreContract) => {
     return ens
 }
 
-//returns all the signals and external nullifiers
-// const getContractData = async () => {
-//     const semaphoreContract = await getSemaphoreContract(context)
-//     const semaphoreClientContract = await getSemaphoreClientContract(context)
-//     let ens = [];
-//     let signals = [];
-
-//     // if (!hasCheckedRegistration) {
-//     //     const leaves = await semaphoreClientContract.getIdentityCommitments()
-//     //     if (leaves.map((x) => x.toString()).indexOf(identityCommitment.toString()) > -1) {
-//     //         setHasRegistered(true)
-//     //         setHasCheckedRegistration(true)
-//     //     }
-//     // }
-
-//     if (externalNullifiers.length === 0) {
-//         ens = await getExternalNullifiers(semaphoreContract)
-//     }
-
-//     const nextSignalIndex = (await semaphoreClientContract.getNextSignalIndex()).toNumber()
-
-//     for (let i=0; i < nextSignalIndex; i++) {
-//         const signal = await semaphoreClientContract.getSignalByIndex(i)
-//         const en = await semaphoreClientContract.getExternalNullifierBySignalIndex(i)
-
-//         signals.push({ signal, en })
-//     }
-//     return {ens, signals};
-// }
-
 export {
     initLocalStorage,
     generateIdentityCommitment
