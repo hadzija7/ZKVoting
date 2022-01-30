@@ -28,8 +28,6 @@ const CreateProcess = () => {
 
     const refValue = useRef(false);
     
-
-    
     const createProcess = async (e) => {
         e.preventDefault();
         console.log("name: ", name);
@@ -118,7 +116,7 @@ const CreateProcess = () => {
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Woohoo, you're reading this text in a modal!
+                    Transaction was executed.
                 </p>
                 <button
                     className="baseButton"

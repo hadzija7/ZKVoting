@@ -4,7 +4,7 @@ import semaphoreAbi from '@/../../abi/Semaphore.json';
 import semaphoreNetworks from '@/../../addresses/Semaphore.json';
 import oneVoteAbi from '@/../../abi/OneVote.json';
 import oneVoteNetworks from '@/../../addresses/OneVote.json';
-// import votingProcessAbi from '@/../../abi/VotingProcess.json';
+import votingProcessAbi from '@/../../abi/VotingProcess.json';
 // import testAbi from '@/../../abi/Test.json';
 // import testBytecode from '@/../../bytecode/Test.json';
 // import bAbi from '@/../../abi/B.json';
@@ -63,10 +63,22 @@ const getVotingProcess = async (id) => {
     return votingProcess;
 }
 
+const getVotingProcessContract = async (id) => {
+    const { ethereum } = window;
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const oneVoteContract = new Contract(oneVoteAddress, oneVoteAbi, signer);
+    const votingProcessAddress = await oneVoteContract.votingProcesses(id);
+    const votingProcessContract = new Contract(votingProcessAddress, votingProcessAbi, signer);
+    console.log("Voting process contract: ", votingProcessContract);
+    return votingProcessContract;
+}
+
 export {
     deployVotingProcess,
     getVotingProcesses,
-    getVotingProcess
+    getVotingProcess,
+    getVotingProcessContract
 }
 // const getProviderAndSigner = async (context) => {
 //     const provider = new ethers.providers.Web3Provider(
