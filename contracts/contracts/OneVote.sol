@@ -21,7 +21,7 @@ contract OneVote {
         string[] memory _proposals,
         Semaphore _semaphore
     ) public {
-        require(_proposals.length > 2, "There need to be at least 2 proposals");
+        require(_proposals.length > 1, "There need to be at least 2 proposals");
         //add new voting proposal
         VotingProcess vp = new VotingProcess(processCounter, _name, _description, _proposals, _semaphore);
 

@@ -4,6 +4,8 @@ pragma solidity ^0.8.0;
 import { Semaphore } from './Semaphore.sol';
 
 contract SemaphoreClient {
+    uint256[] public identityCommitments;
+
     // A mapping of all signals broadcasted
     mapping (uint256 => bytes) public signalIndexToSignal;
 
@@ -19,6 +21,27 @@ contract SemaphoreClient {
 
     constructor(Semaphore _semaphore) {
         semaphore = _semaphore;
+    }
+
+    function getNextSignalIndex() public view returns (uint256) {
+        return nextSignalIndex;
+    }
+
+    function getIdentityCommitments() public view returns (uint256 [] memory) {
+        return identityCommitments;
+    }
+
+    function getIdentityCommitment(uint256 _index) public view returns (uint256) {
+        return identityCommitments[_index];
+    }
+
+    function insertIdentityAsClient(uint256 _leaf) public {
+        semaphore.insertIdentity(_leaf);
+        identityCommitments.push(_leaf);
+    }
+
+    function addExternalNullifier(uint232 _externalNullifier) public {
+        semaphore.addExternalNullifier(_externalNullifier);
     }
 
     function broadcastSignal(

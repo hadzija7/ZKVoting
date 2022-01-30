@@ -20,5 +20,5 @@ module.exports = async function (deployer) {
   deployer.link(PoseidonT6, Semaphore);
   const semaphore = await deployer.deploy(Semaphore, depth, externalNullifier);
   console.log("Contract (semaphore) address:", semaphore.address)
-  deployer.deploy(SemaphoreClient, semaphore.address);
+  // deployer.deploy(SemaphoreClient, semaphore.address);
 };

@@ -74,6 +74,7 @@ const getVotingProcessContract = async (id) => {
     return votingProcessContract;
 }
 
+
 export {
     deployVotingProcess,
     getVotingProcesses,

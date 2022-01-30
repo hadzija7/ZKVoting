@@ -86,7 +86,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
      *                            be the output of a Pedersen hash. It is the
      *                            responsibility of the caller to verify this.
      */
-    function insertIdentity(uint256 _identityCommitment) public onlyOwner
+    function insertIdentity(uint256 _identityCommitment) public //onlyOwner
     returns (uint256) {
         // Ensure that the given identity commitment is not the zero value
         require(

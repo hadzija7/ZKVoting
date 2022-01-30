@@ -53,7 +53,7 @@
   text-align:center;
   transition: all 0.15s;
 }
-.baseButton {
+.greenButton {
   display:inline-block;
   padding:0.46em 1.6em;
   border:0.1em solid #000000;

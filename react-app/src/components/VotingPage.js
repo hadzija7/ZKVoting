@@ -21,8 +21,9 @@ const VotingPage = () => {
             setVotingProcess(result);
         })
 
-        initLocalStorage();
-        setIdentityCommitment(generateIdentityCommitment);
+        initLocalStorage(id);
+        setIdentityCommitment(generateIdentityCommitment(id));
+        console.log("Identity commitment: ", identityCommitment);
     }, []);
 
     const renderRegisterButton = () => {
@@ -37,6 +38,7 @@ const VotingPage = () => {
 
     const handleRegisterClick = async () => {
         const votingProcessesContract = await getVotingProcessContract(id);
+        console.log("Commitment: ", identityCommitment);
         const tx = await votingProcessesContract.insertIdentityAsClient(identityCommitment.toString())
         const receipt = await tx.wait()
         console.log(receipt)

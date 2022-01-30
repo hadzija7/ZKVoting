@@ -87,7 +87,7 @@ contract IncrementalQuinTree is Ownable, Hasher {
      *              field or this function will throw.
      * @return The leaf index.
      */
-    function insertLeaf(uint256 _leaf) public onlyOwner returns (uint256) {
+    function insertLeaf(uint256 _leaf) public returns (uint256) {
         require(
             _leaf < SNARK_SCALAR_FIELD,
             "IncrementalQuinTree: insertLeaf argument must be < SNARK_SCALAR_FIELD"

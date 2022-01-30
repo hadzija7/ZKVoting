@@ -19,17 +19,19 @@ import {
     hasId,
 } from './semaphoreStorage';
 
-const initLocalStorage = () => {
-    initStorage();
+const initLocalStorage = (id) => {
+    initStorage(id);
 }
 
-const generateIdentityCommitment = () => {
+const generateIdentityCommitment = (id) => {
+    console.log("in generate identity")
+    console.log("id: ", id);
     let identity = "";
-    if (hasId()) {
-        identity = retrieveId()
+    if (hasId(id)) {
+        identity = retrieveId(id)
     } else {
         identity = genIdentity()
-        storeId(identity)
+        storeId(identity, id)
     }
     let identityCommitment = genIdentityCommitment(identity)
     return identityCommitment;
