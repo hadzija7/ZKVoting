@@ -2,6 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import Collapse from 'react-bootstrap/Collapse';
 import Spinner from 'react-bootstrap/Spinner';
 import styles from './CreateProcessPage.module.css';
+import {ethers} from 'ethers';
 
 //web3 imports
 import { deployVotingProcess, deployTestContract, getTestContract } from '../web3/contracts'
@@ -60,7 +61,7 @@ const CreateProcess = () => {
         let proposals = input.split(',');
         let array = []
         for(let i=0; i < proposals.length; i ++){
-            array.push(proposals[i].trim());
+            array.push(ethers.utils.toUtf8Bytes(proposals[i].trim()));
         }
         return array;
     }
@@ -111,38 +112,38 @@ const CreateProcess = () => {
                 </div>}
             </form>
             <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Transaction result</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>
-                    Transaction was executed.
-                </p>
-                <button
-                    className="baseButton"
-                    onClick={() => setOpen(!open)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={open}
-                >
-                    Transaction details
-                </button>
-                { transactionResult && <Collapse in={open}>
-                    <div id="example-collapse-text" className={styles.collapse}>
-                        <div>
-                            <h4>transaction hash: </h4>
-                            <p>{transactionResult.hash}</p>
+                <Modal.Header closeButton>
+                    <Modal.Title>Transaction result</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        Transaction was executed.
+                    </p>
+                    <button
+                        className="baseButton"
+                        onClick={() => setOpen(!open)}
+                        aria-controls="example-collapse-text"
+                        aria-expanded={open}
+                    >
+                        Transaction details
+                    </button>
+                    { transactionResult && <Collapse in={open}>
+                        <div id="example-collapse-text" className={styles.collapse}>
+                            <div>
+                                <h4>transaction hash: </h4>
+                                <p>{transactionResult.hash}</p>
+                            </div>
+                            <div>
+                                <h4>nonce: </h4>
+                                <p>{transactionResult.nonce}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4>nonce: </h4>
-                            <p>{transactionResult.nonce}</p>
-                        </div>
-                    </div>
-                </Collapse>}
-            </Modal.Body>
-            <Modal.Footer>
-                <button className="baseButton" onClick={handleClose}>Close</button>
-            </Modal.Footer>
-        </Modal>
+                    </Collapse>}
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="baseButton" onClick={handleClose}>Close</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

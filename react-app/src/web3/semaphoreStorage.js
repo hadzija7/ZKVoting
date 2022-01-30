@@ -13,28 +13,29 @@ const localStorage = window.localStorage
 // The storage key depends on the mixer contracts to prevent conflicts
 // const postfix = config.chain.contracts.SemaphoreClient.slice(2).toLowerCase()
 // const postfix = Math.floor(Math.random() * 10000000);
+const key = 'Semaphore'
 
-const generateKey = (id) => {
-    const postfix = id;
-    const key = `SU_${postfix}`
-    return key;
-}
+// const generateKey = (id) => {
+//     const postfix = id;
+//     const key = `SU_${postfix}`
+//     return key;
+// }
 
-const initStorage = (id) => {
-    const key = generateKey(id);
+const initStorage = () => {
+    // const key = generateKey(id);
     if (!localStorage.getItem(key)) {
         localStorage.setItem(key, '')
     }
 }
 
-const storeId = (identity, id) => {
-    const key = generateKey(id);
+const storeId = (identity) => {
+    // const key = generateKey(id);
     console.log("key: ", key);
     localStorage.setItem(key, serialiseIdentity(identity))
 }
 
-const retrieveId = (id) => {
-    const key = generateKey(id);
+const retrieveId = () => {
+    // const key = generateKey(id);
     var d = localStorage.getItem(key) 
     if (d==null){
         d = "";
@@ -42,8 +43,8 @@ const retrieveId = (id) => {
     return unSerialiseIdentity(d)
 }
 
-const hasId = (id) => {
-    const key = generateKey(id);
+const hasId = () => {
+    // const key = generateKey(id);
     const d = localStorage.getItem(key)
     return d != null && d.length > 0
 }

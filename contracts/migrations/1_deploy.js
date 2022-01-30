@@ -5,6 +5,7 @@ const Semaphore = artifacts.require("Semaphore");
 const SemaphoreClient = artifacts.require("SemaphoreClient");
 const PoseidonT3 = artifacts.require("PoseidonT3");
 const PoseidonT6 = artifacts.require("PoseidonT6");
+const OneVote = artifacts.require("OneVote");
 
 module.exports = async function (deployer) {
   const depth = 20;
@@ -20,5 +21,7 @@ module.exports = async function (deployer) {
   deployer.link(PoseidonT6, Semaphore);
   const semaphore = await deployer.deploy(Semaphore, depth, externalNullifier);
   console.log("Contract (semaphore) address:", semaphore.address)
-  // deployer.deploy(SemaphoreClient, semaphore.address);
+
+  const oneVote = await deployer.deploy(OneVote, semaphore.address);
+  console.log("OneVote deployed: ", oneVote.address);
 };
