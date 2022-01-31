@@ -260,7 +260,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
         );
 
         // Check whether the given Merkle root has been seen previously
-        require(rootHistory[_root], "Semaphore: root not seen");
+        // require(rootHistory[_root], "Semaphore: root not seen");
 
         uint256 signalHash = hashSignal(_signal);
 
@@ -303,7 +303,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
         uint256 _nullifiersHash,
         uint232 _externalNullifier
     ) public 
-        onlyOwnerIfPermissioned
+        // onlyOwnerIfPermissioned
         isValidSignalAndProof(
             _signal, _proof, _root, _nullifiersHash, _externalNullifier
         )
@@ -356,7 +356,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
      * @param _externalNullifier The new external nullifier to set.
      */
     function addExternalNullifier(uint232 _externalNullifier) public
-    onlyOwner {
+    //onlyOwner 
+    {
         addEn(_externalNullifier, false);
     }
 

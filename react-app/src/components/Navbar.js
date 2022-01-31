@@ -5,9 +5,11 @@ import ConnectWallet from './ConnectWallet';
 import { getVotingProcessContract, getOneVoteContract } from '../web3/contracts';
 import { initLocalStorage, generateIdentityCommitment } from '../web3/semaphore'
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const setHasRegistered = props.setHasRegistered;
+    const hasRegistered = props.hasRegistered;
 
-    const [hasRegistered, setHasRegistered] = useState(false);
+    // const [hasRegistered, setHasRegistered] = useState(false);
     const [identityCommitment, setIdentityCommitment] = useState(null);
 
     const handleRegisterClick = async () => {

@@ -4,8 +4,9 @@ import VotingProcess from './VotingProcess';
 
 import { getVotingProcesses } from '../web3/contracts';
 
-const Home = () => {
+const Home = (props) => {
     const [votingProcesses, setVotingProcesses] = useState([]);
+    const hasRegistered = props.hasRegistered;
 
     useEffect(() => {
         getVotingProcesses().then(
@@ -15,11 +16,26 @@ const Home = () => {
         );
     }, [])
 
+    const renderProcesses = () => {
+        let retVal;
+        if(true){
+            retVal = <div>
+
+                    {votingProcesses.map( (votingProcess) => (
+                        <VotingProcess className="VotingProcess" key={votingProcess.id} votingProcess = {votingProcess}/>
+                    ))}
+                </div>
+        }else{
+            retVal = <div>
+                please register
+            </div>
+        }
+        return retVal
+    } 
+
     return (  
         <div className="home">
-            {votingProcesses.map( (votingProcess) => (
-                <VotingProcess className="VotingProcess" key={votingProcess.id} votingProcess = {votingProcess}/>
-            ))}
+            {renderProcesses()}
         </div>
     );
 

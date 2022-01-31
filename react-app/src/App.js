@@ -6,14 +6,18 @@ import Home from './components/Home';
 import VotingPage from './components/VotingPage';
 import CreateProcess from './components/CreateProcessPage';
 
+import { useState, useEffect } from 'react';
+
 function App() {
+  const [hasRegistered, setHasRegistered] = useState(false);
+
   return (
     <Router>
       <div className="App">
-		    <Navbar />
+		    <Navbar setHasRegistered={setHasRegistered} hasRegistered={hasRegistered} />
 		    <div className="content">
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<Home/>} hasRegistered={hasRegistered} />
             <Route path="/voting/:id" element={<VotingPage/>} />
             <Route path="/createProcess" element={<CreateProcess/>} />
           </Routes>

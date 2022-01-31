@@ -56,16 +56,16 @@ contract OneVote {
         uint256 _nullifiersHash,
         uint232 _externalNullifier  //processId
     ) public {
-        bool exist = false;
-        bytes[] memory proposals = votingProcesses[_externalNullifier].getProposals();
-        for(uint i = 0; i < proposals.length; i ++){
-            bytes memory proposal = proposals[i];
-            if (keccak256(abi.encodePacked((_signal))) == keccak256(abi.encodePacked((proposal)))){
-                exist = true;
-                break;
-            }
-        }
-        require(exist == true, "You need to choose one of the voting options!");
+        // bool exist = false;
+        // bytes[] memory proposals = votingProcesses[_externalNullifier].getProposals();
+        // for(uint i = 0; i < proposals.length; i ++){
+        //     bytes memory proposal = proposals[i];
+        //     if (keccak256(abi.encodePacked((_signal))) == keccak256(abi.encodePacked((proposal)))){
+        //         exist = true;
+        //         break;
+        //     }
+        // }
+        // require(exist == true, "You need to choose one of the voting options!");
 
         uint256 signalIndex = nextSignalIndex;
 
@@ -111,6 +111,8 @@ contract OneVote {
         require(_proposals.length > 1, "There need to be at least 2 proposals");
         //add new voting proposal
         VotingProcess vp = new VotingProcess(processCounter, _name, _description, _proposals);
+
+        addExternalNullifier(uint232(processCounter));
 
         votingProcesses[processCounter] = vp;
         processCounter += 1;

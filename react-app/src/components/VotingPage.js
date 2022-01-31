@@ -6,6 +6,7 @@ import styles from './VotingPage.module.css';
 
 import {ethers} from 'ethers';
 
+
 import {
     Identity,
     genIdentity,
@@ -17,7 +18,7 @@ import {
     genProof,
     genPublicSignals,
     genBroadcastSignalParams,
-} from 'libsemaphore';
+} from 'libsemaphore-no-test';
 
 import {
     initStorage,
@@ -26,10 +27,15 @@ import {
     hasId,
 } from '../web3/semaphoreStorage';
 
+// const fs = require('fs');
+
+
 const VotingPage = () => {
 
     const circuitUrl = "https://semaphoreui.blob.core.windows.net/snarks/circuit.json"
+    const PATH_TO_CIRCUIT = '@/../../circuit/circuit.json';
     const provingKeyUrl = "https://semaphoreui.blob.core.windows.net/snarks/proving_key.bin"
+
 
     const { id } = useParams()
 
@@ -53,19 +59,23 @@ const VotingPage = () => {
     const handleVoteClick = async () => {
         //get checked radio button
         var radios = document.getElementsByName('vote');
-        
+        let voteLocal;
+
         for (var i = 0, length = radios.length; i < length; i++) {
             if (radios[i].checked) {
                 console.log("Selected vote: ", radios[i].value);
                 setVote(radios[i].value);
+                voteLocal = radios[i].value;//setvote doesn't update imediately
                 // only one radio can be logically checked, don't check the rest
                 break;
             }
         }
+
+        console.log("Vote", voteLocal);
         
-        const signalAsHex = ethers.utils.hexlify(
-            ethers.utils.toUtf8Bytes(vote),
-        )
+        // const signalAsHex = ethers.utils.hexlify(
+        //     ethers.utils.toUtf8Bytes(vote),
+        // )
 
         const oneVoteContract = await getOneVoteContract();
 
@@ -74,7 +84,8 @@ const VotingPage = () => {
         console.log('Leaves:', leaves)
 
         setProofStatus('Downloading circuit')
-        const cirDef = await (await fetchWithoutCache(circuitUrl)).json() 
+        // const cirDef = JSON.parse(fs.readFileSync(PATH_TO_CIRCUIT, "utf8").toString())
+        const cirDef = await (await fetch(circuitUrl)).json() 
         console.log("Downloaded circuit: ", cirDef);
         const circuit = genCircuit(cirDef)
         console.log("Generated circuit: ", circuit);
@@ -111,15 +122,19 @@ const VotingPage = () => {
         setProofStatus('Voting');
         const publicSignals = genPublicSignals(witness, circuit);
         const params = genBroadcastSignalParams(result, proof, publicSignals);
+        console.log("Params: ", params);
+        const voteBytes = ethers.utils.toUtf8Bytes(voteLocal);
+        console.log("Vote: ", voteLocal);
+
         const tx = await oneVoteContract.vote(
-            ethers.utils.toUtf8Bytes(vote),
+            voteBytes,
             params.proof,
             params.root,
             params.nullifiersHash,
-			id,
-			{ gasLimit: 1000000 }
+			id.toString(),
         )
 
+        console.log("tx: ", tx);
         const receipt = await tx.wait()
         console.log("Voting result: ", receipt);
     }
