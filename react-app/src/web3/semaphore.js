@@ -10,7 +10,7 @@ import {
     genProof,
     genPublicSignals,
     genBroadcastSignalParams,
-} from 'libsemaphore';
+} from 'libsemaphore-no-test';
 
 import {
     initStorage,

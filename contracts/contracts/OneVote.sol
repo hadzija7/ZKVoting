@@ -1,5 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
+// pragma experimental ABIEncoderV2;
 
 import { VotingProcess } from './VotingProcess.sol';
 import { Semaphore } from './Semaphore.sol';
@@ -36,18 +37,23 @@ contract OneVote {
         return identityCommitments[_index];
     }
 
+    event IdentityCommitment(uint256 indexed identityCommitment);
+
     function insertIdentityAsClient(uint256 _leaf) public {
         semaphore.insertIdentity(_leaf);
         identityCommitments.push(_leaf);
+        emit IdentityCommitment(_leaf);
     }
 
     function addExternalNullifier(uint232 _externalNullifier) public {
         semaphore.addExternalNullifier(_externalNullifier);
     }
 
-    constructor(Semaphore _semaphore) {
+    constructor(Semaphore _semaphore) public {
         semaphore = _semaphore;
     }
+
+    event Rooot(uint256 root);
 
     function vote(
         bytes memory _signal,
@@ -77,6 +83,8 @@ contract OneVote {
 
         // increment the signal index
         nextSignalIndex ++;
+
+        emit Rooot(_root);
 
         // broadcast the signal
         semaphore.broadcastSignal(_signal, _proof, _root, _nullifiersHash, _externalNullifier);
@@ -142,6 +150,14 @@ contract OneVote {
             description: votingProcess.description(),
             proposals: votingProcess.getProposals()
         });
+    }
+
+    function getRoots() public view returns (uint256[10] memory){
+        return semaphore.getRoots();
+    }
+
+    function getRootHistory(uint256 id) public view returns (bool){
+        return semaphore.rootHistory(id);
     }
 
 }

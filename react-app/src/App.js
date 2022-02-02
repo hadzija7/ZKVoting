@@ -9,15 +9,14 @@ import CreateProcess from './components/CreateProcessPage';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [hasRegistered, setHasRegistered] = useState(false);
 
   return (
     <Router>
       <div className="App">
-		    <Navbar setHasRegistered={setHasRegistered} hasRegistered={hasRegistered} />
+		    <Navbar />
 		    <div className="content">
           <Routes>
-            <Route path="/" element={<Home/>} hasRegistered={hasRegistered} />
+            <Route path="/" element={<Home/>} />
             <Route path="/voting/:id" element={<VotingPage/>} />
             <Route path="/createProcess" element={<CreateProcess/>} />
           </Routes>

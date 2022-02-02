@@ -1,5 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
+// pragma experimental ABIEncoderV2;
 
 import { Semaphore } from './Semaphore.sol';
 
@@ -21,7 +22,7 @@ contract VotingProcess{
         string memory _name,
         string memory _description,
         bytes[] memory _proposals
-    ){
+    ) public{
         id = _id;
         name = _name;
         description = _description;

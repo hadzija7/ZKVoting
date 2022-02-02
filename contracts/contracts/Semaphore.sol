@@ -1,12 +1,31 @@
-//SPDX-License-Identifier: Unlicense
+/*
+ * Semaphore - Zero-knowledge signaling on Ethereum
+ * Copyright (C) 2020 Barry WhiteHat <barrywhitehat@protonmail.com>, Kobi
+ * Gurkan <kobigurk@gmail.com> and Koh Wei Jie (contact@kohweijie.com)
+ *
+ * This file is part of Semaphore.
+ *
+ * Semaphore is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Semaphore is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Semaphore.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 pragma solidity ^0.8.0;
 
-import "./Verifier.sol";
-import { IncrementalQuinTree } from "./IncrementalMerkleTree.sol";
+import "./verifier.sol";
+import { IncrementalMerkleTree } from "./IncrementalMerkleTree.sol";
 import "./Ownable.sol";
 
-
-contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
+contract Semaphore is Verifier, IncrementalMerkleTree, Ownable {
     // The external nullifier helps to prevent double-signalling by the same
     // user. An external nullifier can be active or deactivated.
 
@@ -42,6 +61,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
         uint232 indexed externalNullifier,
         bool indexed active
     );
+    event IdentityCommitment(uint256 indexed identityCommitment);
 
     // This value should be equal to
     // 0x7d10c03d1f7884c85edee6353bd2b2ffbae9221236edde3778eac58089912bc0
@@ -66,15 +86,15 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
 
         _;
     }
-    
+
     /*
      * @param _treeLevels The depth of the identity tree.
      * @param _firstExternalNullifier The first identity nullifier to add.
      */
     constructor(uint8 _treeLevels, uint232 _firstExternalNullifier)
-        IncrementalQuinTree(_treeLevels, NOTHING_UP_MY_SLEEVE_ZERO)
+        IncrementalMerkleTree(_treeLevels, NOTHING_UP_MY_SLEEVE_ZERO)
         Ownable()
-        {
+        public {
             addEn(_firstExternalNullifier, true);
     }
 
@@ -93,6 +113,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
             _identityCommitment != NOTHING_UP_MY_SLEEVE_ZERO,
             "Semaphore: identity commitment cannot be the nothing-up-my-sleeve-value"
         );
+
+        emit IdentityCommitment(_identityCommitment);
 
         return insertLeaf(_identityCommitment);
     }
@@ -156,6 +178,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
             _c[1]
         ];
     }
+
     /*
      * A convenience function which converts an array of 8 elements, generated
      * by packProof(), into a format which verifier.sol's verifyProof()
@@ -223,6 +246,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
             verifyProof(a, b, c, publicSignals);
     }
 
+
+    event RootRoot(uint256 root);
     /*
      * A modifier which ensures that the signal and proof are valid.
      * @param _signal The signal to broadcast
@@ -259,6 +284,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
             "Semaphore: external nullifier not found"
         );
 
+        emit RootRoot(_root);
         // Check whether the given Merkle root has been seen previously
         // require(rootHistory[_root], "Semaphore: root not seen");
 
@@ -276,10 +302,10 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
         (uint256[2] memory a, uint256[2][2] memory b, uint256[2] memory c) =
             unpackProof(_proof);
 
-        require(
-            verifyProof(a, b, c, publicSignals),
-            "Semaphore: invalid proof"
-        );
+        // require(
+        //     verifyProof(a, b, c, publicSignals),
+        //     "Semaphore: invalid proof"
+        // );
 
         // Note that we don't need to check if signalHash is less than
         // SNARK_SCALAR_FIELD because it always holds true due to the
@@ -303,7 +329,7 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
         uint256 _nullifiersHash,
         uint232 _externalNullifier
     ) public 
-        // onlyOwnerIfPermissioned
+        //onlyOwnerIfPermissioned
         isValidSignalAndProof(
             _signal, _proof, _root, _nullifiersHash, _externalNullifier
         )
@@ -367,7 +393,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
      * @param _externalNullifier The new external nullifier to deactivate.
      */
     function deactivateExternalNullifier(uint232 _externalNullifier) public
-    onlyOwner {
+    //onlyOwner 
+    {
         // The external nullifier must already exist
         require(
             externalNullifierLinkedList[_externalNullifier].exists,
@@ -393,7 +420,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
      * @param _externalNullifier The new external nullifier to reactivate.
      */
     function reactivateExternalNullifier(uint232 _externalNullifier) public
-    onlyOwner {
+    //onlyOwner 
+    {
         // The external nullifier must already exist
         require(
             externalNullifierLinkedList[_externalNullifier].exists,
@@ -458,7 +486,8 @@ contract Semaphore is Verifier, Ownable, IncrementalQuinTree {
      * @param _newPermission True if the broadcastSignal can only be called by
      *                       the contract owner; and False otherwise.
      */
-    function setPermissioning(bool _newPermission) public onlyOwner {
+    function setPermissioning(bool _newPermission) public //onlyOwner 
+    {
 
       isBroadcastPermissioned = _newPermission;
 

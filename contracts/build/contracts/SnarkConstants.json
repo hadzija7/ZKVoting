@@ -1,29 +1,28 @@
 {
   "contractName": "SnarkConstants",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/SnarkConstants.sol\":\"SnarkConstants\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/SnarkConstants.sol\":{\"keccak256\":\"0xac711e4189e4fb0fafbaefc2ed3996a0d48697a9538b8988a1ff856ce7fc433d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://d4e84f334f2bbf10afab76b9b9c273a21557e94c82a6a13aca97fcfaba255890\",\"dweb:/ipfs/QmTYi32TAqfcXJoJyLnsWmJgDwtdhjjKv3FMMTLiJZivFh\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220ce5d6c5119104db1fb12579a2445bc4e5ca420e2ebc75fde2c0d5ae1d166c43d64736f6c63430008000033",
-  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220ce5d6c5119104db1fb12579a2445bc4e5ca420e2ebc75fde2c0d5ae1d166c43d64736f6c63430008000033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/SnarkConstants.sol\":\"SnarkConstants\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/SnarkConstants.sol\":{\"keccak256\":\"0xea84c49a8ff004d52d95fc106d871b00f1a119a803aa4e741f5b1fe13979584c\",\"urls\":[\"bzz-raw://aa106d092d89fff03c65918a71ee33df4677a9cc271742ad482c8d5c04453341\",\"dweb:/ipfs/QmY4xS2eEb8F8CBiigYmgYYQ2Nem5vfW9wpZR72UqKvb6u\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122005024acbd3668da72e91d00e8b2b71d1e3716adbc411be05f7d919fd3726b80b64736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122005024acbd3668da72e91d00e8b2b71d1e3716adbc411be05f7d919fd3726b80b64736f6c63430008000033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "63:181:6:-:0;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "63:181:6:-:0;;;;;",
-  "source": "//SPDX-License-Identifier: Unlicense\npragma solidity ^0.8.0;\n\n\ncontract SnarkConstants {\n    // The scalar field\n    uint256 internal constant SNARK_SCALAR_FIELD = 21888242871839275222246405745257275088548364400416034343698204186575808495617;\n}\n",
+  "sourceMap": "908:181:6:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "908:181:6:-:0;;;;;",
+  "source": "/*\n * Semaphore - Zero-knowledge signaling on Ethereum\n * Copyright (C) 2020 Barry WhiteHat <barrywhitehat@protonmail.com>, Kobi\n * Gurkan <kobigurk@gmail.com> and Koh Wei Jie (contact@kohweijie.com)\n *\n * This file is part of Semaphore.\n *\n * Semaphore is free software: you can redistribute it and/or modify\n * it under the terms of the GNU General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * Semaphore is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU General Public License for more details.\n *\n * You should have received a copy of the GNU General Public License\n * along with Semaphore.  If not, see <http://www.gnu.org/licenses/>.\n */\n\npragma solidity ^0.8.0;\n\ncontract SnarkConstants {\n    // The scalar field\n    uint256 internal constant SNARK_SCALAR_FIELD = 21888242871839275222246405745257275088548364400416034343698204186575808495617;\n}\n",
   "sourcePath": "/home/aleksandar/ZKUniversity/ZKVoting/contracts/contracts/SnarkConstants.sol",
   "ast": {
     "absolutePath": "project:/contracts/SnarkConstants.sol",
     "exportedSymbols": {
       "SnarkConstants": [
-        1525
+        1693
       ]
     },
-    "id": 1526,
-    "license": "Unlicense",
+    "id": 1694,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1521,
+        "id": 1689,
         "literals": [
           "solidity",
           "^",
@@ -31,7 +30,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "37:23:6"
+        "src": "883:23:6"
       },
       {
         "abstract": false,
@@ -39,21 +38,21 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1525,
+        "id": 1693,
         "linearizedBaseContracts": [
-          1525
+          1693
         ],
         "name": "SnarkConstants",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 1524,
+            "id": 1692,
             "mutability": "constant",
             "name": "SNARK_SCALAR_FIELD",
             "nodeType": "VariableDeclaration",
-            "scope": 1525,
-            "src": "117:124:6",
+            "scope": 1693,
+            "src": "962:124:6",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -61,10 +60,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 1522,
+              "id": 1690,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "117:7:6",
+              "src": "962:7:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -72,14 +71,14 @@
             },
             "value": {
               "hexValue": "3231383838323432383731383339323735323232323436343035373435323537323735303838353438333634343030343136303334333433363938323034313836353735383038343935363137",
-              "id": 1523,
+              "id": 1691,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "164:77:6",
+              "src": "1009:77:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_21888242871839275222246405745257275088548364400416034343698204186575808495617_by_1",
                 "typeString": "int_const 2188...(69 digits omitted)...5617"
@@ -89,25 +88,24 @@
             "visibility": "internal"
           }
         ],
-        "scope": 1526,
-        "src": "63:181:6"
+        "scope": 1694,
+        "src": "908:181:6"
       }
     ],
-    "src": "37:208:6"
+    "src": "883:207:6"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/SnarkConstants.sol",
     "exportedSymbols": {
       "SnarkConstants": [
-        1525
+        1693
       ]
     },
-    "id": 1526,
-    "license": "Unlicense",
+    "id": 1694,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1521,
+        "id": 1689,
         "literals": [
           "solidity",
           "^",
@@ -115,7 +113,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "37:23:6"
+        "src": "883:23:6"
       },
       {
         "abstract": false,
@@ -123,21 +121,21 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1525,
+        "id": 1693,
         "linearizedBaseContracts": [
-          1525
+          1693
         ],
         "name": "SnarkConstants",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 1524,
+            "id": 1692,
             "mutability": "constant",
             "name": "SNARK_SCALAR_FIELD",
             "nodeType": "VariableDeclaration",
-            "scope": 1525,
-            "src": "117:124:6",
+            "scope": 1693,
+            "src": "962:124:6",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -145,10 +143,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 1522,
+              "id": 1690,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "117:7:6",
+              "src": "962:7:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -156,14 +154,14 @@
             },
             "value": {
               "hexValue": "3231383838323432383731383339323735323232323436343035373435323537323735303838353438333634343030343136303334333433363938323034313836353735383038343935363137",
-              "id": 1523,
+              "id": 1691,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "164:77:6",
+              "src": "1009:77:6",
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_21888242871839275222246405745257275088548364400416034343698204186575808495617_by_1",
                 "typeString": "int_const 2188...(69 digits omitted)...5617"
@@ -173,11 +171,11 @@
             "visibility": "internal"
           }
         ],
-        "scope": 1526,
-        "src": "63:181:6"
+        "scope": 1694,
+        "src": "908:181:6"
       }
     ],
-    "src": "37:208:6"
+    "src": "883:207:6"
   },
   "compiler": {
     "name": "solc",
@@ -185,7 +183,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-26T17:09:10.895Z",
+  "updatedAt": "2022-02-02T06:49:06.803Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

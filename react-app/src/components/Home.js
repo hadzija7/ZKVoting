@@ -4,9 +4,13 @@ import VotingProcess from './VotingProcess';
 
 import { getVotingProcesses } from '../web3/contracts';
 
-const Home = (props) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { selectHasRegistered, selectTestState, setTestState } from '../store/home.slice';
+
+const Home = () => {
     const [votingProcesses, setVotingProcesses] = useState([]);
-    const hasRegistered = props.hasRegistered;
+
+    const hasRegistered = useSelector(selectHasRegistered);
 
     useEffect(() => {
         getVotingProcesses().then(
@@ -18,7 +22,7 @@ const Home = (props) => {
 
     const renderProcesses = () => {
         let retVal;
-        if(true){
+        if(hasRegistered){
             retVal = <div>
 
                     {votingProcesses.map( (votingProcess) => (
@@ -26,8 +30,8 @@ const Home = (props) => {
                     ))}
                 </div>
         }else{
-            retVal = <div>
-                please register
+            retVal = <div style={{margin: "0 auto", justifyContent: "center", textAlign:"center"}}>
+                <h1>please register</h1>
             </div>
         }
         return retVal

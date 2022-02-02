@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import {ethers} from 'ethers';
 
 import ConnectWallet from './ConnectWallet';
-import { getVotingProcessContract, getOneVoteContract } from '../web3/contracts';
-import { initLocalStorage, generateIdentityCommitment } from '../web3/semaphore'
+import { getOneVoteContract } from '../web3/contracts';
+import { initLocalStorage, generateIdentityCommitment } from '../web3/semaphore';
 
-const Navbar = (props) => {
-    const setHasRegistered = props.setHasRegistered;
-    const hasRegistered = props.hasRegistered;
+import { useDispatch, useSelector } from 'react-redux'
+import { selectHasRegistered, setHasRegistered } from '../store/home.slice';
+
+const Navbar = () => {
+    const dispatch = useDispatch()
+    const hasRegistered = useSelector(selectHasRegistered);
 
     // const [hasRegistered, setHasRegistered] = useState(false);
     const [identityCommitment, setIdentityCommitment] = useState(null);
@@ -15,12 +19,12 @@ const Navbar = (props) => {
     const handleRegisterClick = async () => {
         const oneVote = await getOneVoteContract();
         console.log("Commitment: ", identityCommitment);
-        const tx = await oneVote.insertIdentityAsClient(identityCommitment.toString())
+        const tx = await oneVote.insertIdentityAsClient(ethers.BigNumber.from(identityCommitment))
         const receipt = await tx.wait()
         console.log(receipt)
 
         if (receipt.status === 1) {
-            setHasRegistered(true);
+            dispatch(setHasRegistered(true));
         }else{
         }
     }
@@ -39,7 +43,7 @@ const Navbar = (props) => {
                 <Link className="link" to="/createProcess">Create voting process</Link>
             </div>
         }else {
-            button = <button onClick={handleRegisterClick} className="baseButton">Register identity</button>
+            button = <button onClick={handleRegisterClick} className="baseButton" style={{marginRight:"1em"}}>Register identity</button>
         }
         return button;
     }

@@ -5,7 +5,7 @@ import { getVotingProcess, getOneVoteContract } from '../web3/contracts';
 import styles from './VotingPage.module.css';
 
 import {ethers} from 'ethers';
-
+import * as snarkjs from 'snarkjs'
 
 import {
     Identity,
@@ -45,7 +45,7 @@ const VotingPage = () => {
 
     useEffect(() => {
         getVotingProcess(id).then((result) => {
-            console.log("Voting process result: ", result);
+            console.log("Voting process id: ", result.id);
             setVotingProcess(result);
         })
     }, []);
@@ -57,6 +57,7 @@ const VotingPage = () => {
     }
 
     const handleVoteClick = async () => {
+
         //get checked radio button
         var radios = document.getElementsByName('vote');
         let voteLocal;
@@ -79,13 +80,23 @@ const VotingPage = () => {
 
         const oneVoteContract = await getOneVoteContract();
 
+        const idCommitments = await oneVoteContract.identityCommitments(0);
+        console.log("Identity commitments: ", idCommitments)
+
+        const roots = await oneVoteContract.getRoots();
+        console.log("Tree roots: ", roots);
+
+        const rootHistory = await oneVoteContract.getRootHistory(0);
+        console.log("Root history: ", rootHistory);
+
+
         setProofStatus('Downloading leaves')
         const leaves = await oneVoteContract.getIdentityCommitments()
         console.log('Leaves:', leaves)
 
         setProofStatus('Downloading circuit')
         // const cirDef = JSON.parse(fs.readFileSync(PATH_TO_CIRCUIT, "utf8").toString())
-        const cirDef = await (await fetch(circuitUrl)).json() 
+        const cirDef = await (await fetchWithoutCache(circuitUrl)).json() 
         console.log("Downloaded circuit: ", cirDef);
         const circuit = genCircuit(cirDef)
         console.log("Generated circuit: ", circuit);
@@ -102,23 +113,25 @@ const VotingPage = () => {
         const provingKey = toBuffer((await (await fetch(provingKeyUrl)).arrayBuffer()))
         console.log("Proving key: ", provingKey);
 
+        const identity = retrieveId();
+
         setProofStatus('Generating witness')
         const result = await genWitness(
-			vote,
+            vote,
 			circuit,
-			retrieveId(),
+			identity,
 			leaves,
 			20,//config.chain.semaphoreTreeDepth,
-			id,
+			snarkjs.bigInt(id),
         )
         
         const witness = result.witness
         console.log("Witness: ", witness);
-
+        
         setProofStatus('Generating proof')
         const proof = await genProof(witness, provingKey)
         console.log('Generated proof: ', proof);
-
+        
         setProofStatus('Voting');
         const publicSignals = genPublicSignals(witness, circuit);
         const params = genBroadcastSignalParams(result, proof, publicSignals);
@@ -126,17 +139,25 @@ const VotingPage = () => {
         const voteBytes = ethers.utils.toUtf8Bytes(voteLocal);
         console.log("Vote: ", voteLocal);
 
-        const tx = await oneVoteContract.vote(
-            voteBytes,
-            params.proof,
-            params.root,
-            params.nullifiersHash,
-			id.toString(),
-        )
 
-        console.log("tx: ", tx);
-        const receipt = await tx.wait()
-        console.log("Voting result: ", receipt);
+        console.log("Proof root: ", ethers.BigNumber.from(params.root));
+
+        try{
+            const tx = await oneVoteContract.vote(
+                params.signal,
+                params.proof,
+                ethers.BigNumber.from(params.root),
+                params.nullifiersHash,
+                params.externalNullifier,
+            )
+    
+            console.log("tx: ", tx);
+            const receipt = await tx.wait()
+            console.log("Voting result: ", receipt);
+        } catch (error){
+            console.log("Internal error happened: ", error);
+            window.alert(error.data.message);
+        }
     }
 
     return (  
