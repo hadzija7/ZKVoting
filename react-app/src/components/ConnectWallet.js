@@ -1,9 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { ethers } from 'ethers';
+
+import { useDispatch, useSelector } from 'react-redux'
+import { selectNetwork, selectCorrectNetwork, setNetwork, setCorrectNetwork } from '../store/home.slice';
+
+import Modal from 'react-bootstrap/Modal';
+
 
 const ConnectWallet = () => {
+    const dispatch = useDispatch();
+    const correctNetwork = useSelector(selectCorrectNetwork);
+    const networkId = useSelector(selectNetwork);
+
+    const HARMONY_TESTNET_ID = "1666700000";
     const [currentAccount, setCurrentAccount] = useState(null);
+
+    // const [correctNetwork2, setCorrectNetwork2] = useState(true);
 
     const checkWalletIsConnected = async () => {
         const {ethereum} = window;
@@ -39,9 +53,31 @@ const ConnectWallet = () => {
         }
     }
 
+    const checkNetwork = async () => {
+        const { ethereum } = window;
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const { chainId } = await provider.getNetwork();
+        dispatch(setNetwork(chainId));
+        console.log("Connected to chain with id: ", chainId);
+        if(chainId != HARMONY_TESTNET_ID){
+            dispatch(setCorrectNetwork(false));
+            // setCorrectNetwork2(false);
+        }
+    }
+
+    const handleNetworkChange = async () => {
+        if(window.ethereum){
+            window.ethereum.on('chainChanged', () => {
+                checkNetwork();
+            })
+        }
+    }
+
     useEffect(() => {
         checkWalletIsConnected();
-    })
+        checkNetwork();
+        handleNetworkChange();
+    },[])
 
     const connectWalletButton = () => {
         return (
@@ -58,9 +94,26 @@ const ConnectWallet = () => {
         )
     }
 
+    // onHide={handleClose}
+
     return (  
         <div className="connectWallet" style={{color: "grey"}}>
             {currentAccount ? showAccount() : connectWalletButton()}
+            <div>
+                <Modal show={!correctNetwork}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Wrong network</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>
+                            Network id: {networkId}
+                            We support Harmony testnet
+                        </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
     );
 }

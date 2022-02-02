@@ -4,33 +4,26 @@ export const homeSlice = createSlice({
     name:'home',
     initialState:{
         hasRegistered: false,
-        testState: 'test',
+        network: '',
+        correctNetwork: true,
     },
     reducers:{
         setHasRegistered: (state, action)=>{
             state.hasRegistered = action.payload;
         },
-        setTestState: (state, action)=>{
-            state.testState = action.payload;
+        setNetwork: (state, action)=>{
+            state.network = action.payload;
+        },
+        setCorrectNetwork: (state, action)=>{
+            state.network = action.payload;
         }
     },
-    // extraReducers:{
-    //     [getTimesheets.pending]: (state, action)=>{
-    //         state.status = 'loading'
-    //     },
-    //     [getTimesheets.fulfilled]: (state, {payload}) => {
-    //         state.timesheets= payload
-    //         state.status = 'success'
-    //     },
-    //     [getTimesheets.rejected]: (state, action) => {
-    //         state.status = 'failed'
-    //     },
-    // }
 });
 
 export const selectHasRegistered = (state) => state.home.hasRegistered;
-export const selectTestState = (state) => state.home.testState;
+export const selectNetwork = (state) => state.home.network;
+export const selectCorrectNetwork = (state) => state.home.correctNetwork;
 
-export const { setHasRegistered, setTestState } = homeSlice.actions;
+export const { setHasRegistered, setNetwork, setCorrectNetwork } = homeSlice.actions;
 
 export default homeSlice.reducer
