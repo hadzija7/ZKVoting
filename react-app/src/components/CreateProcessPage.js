@@ -96,7 +96,7 @@ const CreateProcess = () => {
                     />
                 </div>
                 <div>
-                    <label>Proposals:</label>
+                    <label>Proposals (separated with ","):</label>
                     <input 
                         type="text"
                         required

@@ -67,11 +67,23 @@ const getOneVoteContract = async () => {
     return oneVoteContract;
 }
 
+const getSignalsForNullifier = async (id) => {
+    const { ethereum } = window;
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const oneVoteContract = new Contract(oneVoteAddress, oneVoteAbi, signer);
+    const votingProcessAddress = await oneVoteContract.votingProcesses(id);
+    const votingProcessContract = new Contract(votingProcessAddress, votingProcessAbi, signer);
+    const result = await votingProcessContract.getVotesPerProposal();
+    console.log("Votes per proposal: ", result);
+}
+
 
 export {
     deployVotingProcess,
     getVotingProcesses,
     getVotingProcess,
     getVotingProcessContract,
-    getOneVoteContract
+    getOneVoteContract,
+    getSignalsForNullifier,
 }

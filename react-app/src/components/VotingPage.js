@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVotingProcess, getOneVoteContract } from '../web3/contracts';
+import { getVotingProcess, getOneVoteContract, getSignalsForNullifier } from '../web3/contracts';
 
 import styles from './VotingPage.module.css';
 import Spinner from 'react-bootstrap/Spinner';
@@ -48,6 +48,7 @@ const VotingPage = () => {
             console.log("Voting process id: ", result.id);
             setVotingProcess(result);
         })
+        getSignalsForNullifier(id);
     }, []);
 
     const fetchWithoutCache = (
@@ -224,6 +225,9 @@ const VotingPage = () => {
                 </div>
                 <div style={{marginTop: "2em"}}>
                     {renderVotingStatus()}
+                </div>
+                <div>
+                    <h2>Votes</h2>
                 </div>
             </div>}
         </div>

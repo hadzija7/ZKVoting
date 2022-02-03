@@ -10,11 +10,34 @@ contract VotingProcess{
     string public description;
     bytes[] public proposals;
 
-    mapping (bytes => uint) votesPerProposal;
+    mapping (bytes => uint256) public votesPerProposal;
+
     bytes winningProposal;
+
+    struct VoteProposal {
+        bytes proposal;
+        uint256 numberOfVotes;
+    }
 
     function getProposals() view public returns (bytes[] memory){
         return proposals;
+    }
+
+    function getVotesPerProposal() view public returns (VoteProposal[] memory){
+        uint256 i = 0;
+        VoteProposal[] memory returnVotes = new VoteProposal[](proposals.length);
+
+        for(i; i < proposals.length; i++){
+            returnVotes[i] = VoteProposal({
+                proposal: proposals[i],
+                numberOfVotes: votesPerProposal[proposals[i]]
+            });
+        }
+        return returnVotes;
+    }
+
+    function vote(bytes memory signal) public {
+        votesPerProposal[signal] += 1;
     }
 
     constructor(

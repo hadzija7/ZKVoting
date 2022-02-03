@@ -17,6 +17,8 @@ contract OneVote {
     // A mapping between signal indices to external nullifiers
     mapping (uint256 => uint256) public signalIndexToExternalNullifier;
 
+    mapping (uint232 => bytes[]) public signalsForNullifier;
+
     // The next index of the `signalIndexToSignal` mapping
     uint256 public nextSignalIndex = 0;
 
@@ -80,6 +82,10 @@ contract OneVote {
 
         // map the the signal index to the given external nullifier
         signalIndexToExternalNullifier[nextSignalIndex] = _externalNullifier;
+
+        signalsForNullifier[_externalNullifier].push(_signal);
+
+        votingProcesses[_externalNullifier].vote(_signal);
 
         // increment the signal index
         nextSignalIndex ++;
