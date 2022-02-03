@@ -3,37 +3,15 @@ import { useState, useEffect } from 'react';
 import {ethers} from 'ethers';
 
 import ConnectWallet from './ConnectWallet';
-import { getOneVoteContract } from '../web3/contracts';
-import { initLocalStorage, generateIdentityCommitment } from '../web3/semaphore';
 
-import { useDispatch, useSelector } from 'react-redux'
-import { selectHasRegistered, setHasRegistered } from '../store/home.slice';
+import { useSelector } from 'react-redux'
+import { selectHasRegistered, selectNetwork } from '../store/home.slice';
 
 const Navbar = () => {
-    const dispatch = useDispatch()
+    const HARMONY_TESTNET_ID = "1666700000";
+
     const hasRegistered = useSelector(selectHasRegistered);
-
-    // const [hasRegistered, setHasRegistered] = useState(false);
-    const [identityCommitment, setIdentityCommitment] = useState(null);
-
-    const handleRegisterClick = async () => {
-        const oneVote = await getOneVoteContract();
-        console.log("Commitment: ", identityCommitment);
-        const tx = await oneVote.insertIdentityAsClient(ethers.BigNumber.from(identityCommitment))
-        const receipt = await tx.wait()
-        console.log(receipt)
-
-        if (receipt.status === 1) {
-            dispatch(setHasRegistered(true));
-        }else{
-        }
-    }
-
-    useEffect(() => {
-        initLocalStorage();
-        setIdentityCommitment(generateIdentityCommitment());
-        console.log("Identity commitment: ", identityCommitment);
-    }, []);
+    const networkId = useSelector(selectNetwork);
 
     const renderRegisterButton = () => {
         let button;
@@ -42,10 +20,18 @@ const Navbar = () => {
                 <Link className="link" to="/">Home</Link>
                 <Link className="link" to="/createProcess">Create voting process</Link>
             </div>
-        }else {
-            button = <button onClick={handleRegisterClick} className="baseButton" style={{marginRight:"1em"}}>Register identity</button>
         }
         return button;
+    }
+
+    const renderNetwork = () => {
+        let ret;
+        if (networkId == HARMONY_TESTNET_ID){
+            ret = <div className="networkLabel">Harmony Testnet</div>
+        }else{
+            ret = <div className="networkLabel">Wrong network</div>
+        }
+        return ret;
     }
 
     return (  
@@ -53,6 +39,9 @@ const Navbar = () => {
             <Link className="link" to="/"><h1>OneVote</h1></Link>
             <div className="links">
                 {renderRegisterButton()}
+            </div>
+            <div>
+                {renderNetwork()}
             </div>
             <div>
                 <ConnectWallet />

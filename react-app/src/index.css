@@ -73,3 +73,25 @@
 .voting-page {
   font-size: calc(10px + 0.6vw);
 }
+
+.networkLabel {
+  display:inline-block;
+  padding:0.46em 1.6em;
+  border:0.1em solid #000000;
+  margin:0 0.8em 0.2em 0;
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:700;
+  color: gray;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  background-color: #FFFFFF;
+  text-align:center;
+  transition: all 0.15s;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}

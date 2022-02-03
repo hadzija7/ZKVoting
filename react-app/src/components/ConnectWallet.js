@@ -17,6 +17,8 @@ const ConnectWallet = () => {
     const HARMONY_TESTNET_ID = "1666700000";
     const [currentAccount, setCurrentAccount] = useState(null);
 
+    const [networkChangeStatus, setNetworkChangeStatus] = useState('');
+
     // const [correctNetwork2, setCorrectNetwork2] = useState(true);
 
     const checkWalletIsConnected = async () => {
@@ -61,6 +63,7 @@ const ConnectWallet = () => {
         console.log("Connected to chain with id: ", chainId);
         if(chainId != HARMONY_TESTNET_ID){
             dispatch(setCorrectNetwork(false));
+            console.log("Network is bad");
             // setCorrectNetwork2(false);
         }
     }
@@ -70,6 +73,7 @@ const ConnectWallet = () => {
             window.ethereum.on('chainChanged', () => {
                 checkNetwork();
             })
+            console.log("Handler on change set");
         }
     }
 
@@ -77,6 +81,7 @@ const ConnectWallet = () => {
         checkWalletIsConnected();
         checkNetwork();
         handleNetworkChange();
+        console.log("Correct network: ", correctNetwork.toString());
     },[])
 
     const connectWalletButton = () => {
@@ -94,6 +99,26 @@ const ConnectWallet = () => {
         )
     }
 
+    const switchNetwork = async () => {
+        try {
+            const provider = window.ethereum;
+            const res = await provider.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: ethers.utils.hexlify(Number(HARMONY_TESTNET_ID))}],
+            });
+            dispatch(setNetwork(HARMONY_TESTNET_ID));
+            dispatch(setCorrectNetwork(true));
+            console.log("You have succefully switched to Harmony Test network: ");
+        } catch (switchError) {
+            // This error code indicates that the chain has not been added to MetaMask.
+            if (switchError.code === 4902) {
+                setNetworkChangeStatus("This network is not available in your metamask, please add it");
+                console.log("This network is not available in your metamask, please add it")
+            }
+            console.log("Failed to switch to the network: ", switchError)
+        }
+    }
+
     // onHide={handleClose}
 
     return (  
@@ -107,8 +132,12 @@ const ConnectWallet = () => {
                     <Modal.Body>
                         <p>
                             Network id: {networkId}
+                        </p>
+                        <p>
                             We support Harmony testnet
                         </p>
+                        <button onClick={switchNetwork} className="baseButton">Switch network</button>
+                        <p>{networkChangeStatus}</p>
                     </Modal.Body>
                     <Modal.Footer>
                     </Modal.Footer>

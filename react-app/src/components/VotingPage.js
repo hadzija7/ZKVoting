@@ -74,10 +74,6 @@ const VotingPage = () => {
 
         console.log("Vote", voteLocal);
         
-        // const signalAsHex = ethers.utils.hexlify(
-        //     ethers.utils.toUtf8Bytes(vote),
-        // )
-
         const oneVoteContract = await getOneVoteContract();
 
         const idCommitments = await oneVoteContract.identityCommitments(0);

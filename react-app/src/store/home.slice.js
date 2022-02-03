@@ -15,7 +15,7 @@ export const homeSlice = createSlice({
             state.network = action.payload;
         },
         setCorrectNetwork: (state, action)=>{
-            state.network = action.payload;
+            state.correctNetwork = action.payload;
         }
     },
 });
