@@ -18,12 +18,13 @@
 .votingProcess {
     display: grid;
     grid-template-columns: auto auto;
-    background-color: cornsilk;
+    border: 1px solid #f1356d;
     max-width: 50%;
     height: 200px;
     margin: auto;
     margin-bottom: 2em;
     font-size: calc(10px + 0.6vw);
+    padding: 1em;
 }
 
 .votingChild {
