@@ -119,6 +119,30 @@ const ConnectWallet = () => {
         }
     }
 
+    const addHarmonyToMetamask = async () => {
+        try {
+            const provider = window.ethereum;
+            await provider.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+
+                    { 
+                        chainId: '0x6357D2E0', 
+                        chainName:'Harmony Testnet',
+                        rpcUrls:['https://api.s0.b.hmny.io'],
+                        blockExplorerUrls:['https://explorer.pops.one/'],  
+                        nativeCurrency: { 
+                            symbol:'ONE',   
+                            decimals: 18
+                        }
+                    }        
+                ]
+            });
+          } catch (addError) {
+             console.log(addError);
+        }
+    }
+
     // onHide={handleClose}
 
     return (  
@@ -137,6 +161,7 @@ const ConnectWallet = () => {
                             We support Harmony testnet
                         </p>
                         <button onClick={switchNetwork} className="baseButton">Switch network</button>
+                        <button onClick={addHarmonyToMetamask} className="inverseButton">Add harmony to metamask</button>
                         <p>{networkChangeStatus}</p>
                     </Modal.Body>
                     <Modal.Footer>

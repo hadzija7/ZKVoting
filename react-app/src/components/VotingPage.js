@@ -33,7 +33,6 @@ import {
 const VotingPage = () => {
 
     const circuitUrl = "https://semaphoreui.blob.core.windows.net/snarks/circuit.json"
-    const PATH_TO_CIRCUIT = '@/../../circuit/circuit.json';
     const provingKeyUrl = "https://semaphoreui.blob.core.windows.net/snarks/proving_key.bin"
 
 
@@ -161,21 +160,22 @@ const VotingPage = () => {
             {votingProcess && <div>
                 <div>
                     <h1>{votingProcess.name}</h1>
-                    <p>{votingProcess.description}</p> 
+                    <h4>{votingProcess.description}</h4> 
                 </div>
                     <div id="example-collapse-text" className={styles.collapse}>
                         <div>
-                            Successfuly registered, let's vote now.
+                            <h4>
+                                Choose a voting option
+                            </h4>
                         </div>
                         <div className={styles.proposalsContainer}>
                             {console.log(votingProcess.proposals)}
-                        {votingProcess.proposals.map( (proposal) => (
-                            <div key={proposal}>
-                                <input value={proposal} type="radio" name="vote" />
-                                {ethers.utils.toUtf8String(proposal)}
-                            </div>
-                        ))}
-                            
+                            {votingProcess.proposals.map( (proposal) => (
+                                <div key={proposal}>
+                                    <input value={proposal} type="radio" name="vote" />
+                                    {ethers.utils.toUtf8String(proposal)}
+                                </div>
+                            ))}
                         </div>
                         <div style={{marginTop: "2em"}}>
                             <button onClick={handleVoteClick} className="baseButton">Vote</button>

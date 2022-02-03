@@ -34,6 +34,7 @@
 .content {
   max-width: 80%;
   margin: 3em auto;
+  margin-bottom: 7em; 
 }
 
 /*Button styles*/
@@ -53,6 +54,23 @@
   text-align:center;
   transition: all 0.15s;
 }
+.inverseButton{
+  display:inline-block;
+  padding:0.46em 1.6em;
+  border:0.1em solid #000000;
+  margin:0 0.2em 0.2em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:700;
+  color:#f1356d;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  background-color:#FFFFFF;
+  text-align:center;
+  transition: all 0.15s;
+}
+
 .greenButton {
   display:inline-block;
   padding:0.46em 1.6em;
@@ -94,4 +112,36 @@
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+}
+
+.footer{
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: none repeat scroll 0 0 transparent;
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10em;
+}
+
+.footerSubdiv{
+  width: 70%;
+  margin: 0 auto;
+  border-top: 1px solid black;
+  /* background-color: #f7dee5; */
+  height: 100%;
+}
+
+.footerSubdiv button {
+  font-family: Arial, Verdana;
+  border-radius:2em;
+  background-color: gray;
+  padding: 0.3em;
+  display: inline-block;
+  border: 2px solid #f1356d;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
 }

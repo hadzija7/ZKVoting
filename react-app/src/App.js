@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Home from './components/Home';
 import Register from './components/Register';
+import Footer from './components/Footer';
 import VotingPage from './components/VotingPage';
 import CreateProcess from './components/CreateProcessPage';
+import HowItWorks from './components/HowItWorks';
 
 import { useSelector } from 'react-redux';
 import { selectHasRegistered } from './store/home.slice';
@@ -19,6 +21,7 @@ function App() {
       ret = 
       <Routes>
         <Route path="/" element={<Register/>} />
+        <Route path="/howItWorks" element={<HowItWorks/>} />
       </Routes>
     }else{
       ret = 
@@ -38,6 +41,7 @@ function App() {
 		    <div className="content">
           {renderRoutes()}
 		    </div>
+        <Footer />
       </div>
     </Router>
   );
