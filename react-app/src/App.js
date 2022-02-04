@@ -41,7 +41,7 @@ function App() {
 		    <div className="content">
           {renderRoutes()}
 		    </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
