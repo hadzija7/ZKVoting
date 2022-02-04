@@ -22452,8 +22452,8 @@
     "1666700000": {
       "events": {},
       "links": {},
-      "address": "0x6c0a81e25aB58d9c15dB460D8d1E2A290DFaE7a2",
-      "transactionHash": "0xfce8f7500bff3773348f4b9ef76faf1bdc202ba58f24d83d0f6598b13a4ca4aa"
+      "address": "0x52caD800435bdd71292fFA9dd053Bf3450441E45",
+      "transactionHash": "0xcc449e4f4d5f4c80b010182f97830dbca3ed81e47b55d0c6ad0f35d75b42f58a"
     },
     "1643355699361": {
       "events": {},
@@ -22463,7 +22463,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-03T16:30:36.177Z",
+  "updatedAt": "2022-02-04T15:21:20.424Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -76,6 +76,7 @@ const getSignalsForNullifier = async (id) => {
     const votingProcessContract = new Contract(votingProcessAddress, votingProcessAbi, signer);
     const result = await votingProcessContract.getVotesPerProposal();
     console.log("Votes per proposal: ", result);
+    return result;
 }
 
 

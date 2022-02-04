@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVotingProcess, getOneVoteContract, getSignalsForNullifier } from '../web3/contracts';
+import { getVotingProcess, getOneVoteContract, getSignalsForNullifier, getVotingProcessContract } from '../web3/contracts';
 
 import styles from './VotingPage.module.css';
 import Spinner from 'react-bootstrap/Spinner';
@@ -42,13 +42,16 @@ const VotingPage = () => {
     const [votingProcess, setVotingProcess] = useState(null);
     const [vote, setVote] = useState('');
     const [proofStatus, setProofStatus] = useState('');
+    const [votesPerProposal, setVotesPerProposal] = useState(null);
 
     useEffect(() => {
         getVotingProcess(id).then((result) => {
             console.log("Voting process id: ", result.id);
             setVotingProcess(result);
         })
-        getSignalsForNullifier(id);
+        getSignalsForNullifier(id).then((result) => {
+            setVotesPerProposal(result);
+        });
     }, []);
 
     const fetchWithoutCache = (
@@ -142,10 +145,16 @@ const VotingPage = () => {
 
 
             console.log("Proof root: ", ethers.BigNumber.from(params.root));
+            console.log("Signal: ", ethers.utils.toUtf8Bytes(params.signal));
 
             try{
+                // const vp = await getVotingProcessContract(id);
+                // const vpRes = await vp.vote(voteLocal);
+                // console.log("Voted: ", vpRes);
+                // console.log("Vote decision: ", ethers.utils.toUtf8Bytes(voteLocal))
                 const tx = await oneVoteContract.vote(
-                    params.signal,
+                    //ethers.utils.toUtf8Bytes(params.signal),
+                    voteLocal,
                     params.proof,
                     ethers.BigNumber.from(params.root),
                     params.nullifiersHash,
@@ -219,15 +228,25 @@ const VotingPage = () => {
                             </div>
                         ))}
                     </div>
-                    <div style={{marginTop: "2em"}}>
+                    <div style={{marginTop: "1em"}}>
                         <button onClick={handleVoteClick} className="baseButton">Vote</button>
                     </div>
                 </div>
-                <div style={{marginTop: "2em"}}>
+                <div style={{marginTop: "2em", marginBottom: "4em"}}>
                     {renderVotingStatus()}
                 </div>
                 <div>
-                    <h2>Votes</h2>
+                    <h2 style={{fontStyle:"italic", color: "gray"}}>Votes</h2>
+                    <div>
+                        {
+                          votesPerProposal && votesPerProposal.map( (proposal) => (
+                                <div key={proposal[0]} >
+                                    <label style={{color: "#f1356d", fontSize:"calc(12px + 0.6vw)", fontWeight:"600", fontStyle:"italic"}}>{ethers.utils.toUtf8String(proposal[0])}: </label>
+                                    <label style={{marginLeft:"1em"}}>{proposal[1].toString()}</label>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>}
         </div>

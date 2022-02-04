@@ -8,6 +8,7 @@
     
 }
 .subtitle {
-    font-size: calc(12px + 1.5vw);
+    margin-bottom: 2em;
+    font-size: calc(12px + 1.1vw);
     font-weight: 400;
 }

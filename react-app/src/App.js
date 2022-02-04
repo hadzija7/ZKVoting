@@ -36,7 +36,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="app">
 		    <Navbar />
 		    <div className="content">
           {renderRoutes()}

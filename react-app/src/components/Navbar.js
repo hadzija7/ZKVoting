@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import {ethers} from 'ethers';
 
 import ConnectWallet from './ConnectWallet';
 
 import { useSelector } from 'react-redux'
 import { selectHasRegistered, selectNetwork } from '../store/home.slice';
+
+import logo from '../assets/OneVoteLogo.png';
 
 const Navbar = () => {
     const HARMONY_TESTNET_ID = "1666700000";
@@ -36,7 +36,7 @@ const Navbar = () => {
 
     return (  
         <nav className="navbar">
-            <Link className="link" to="/"><h1>OneVote</h1></Link>
+            <Link className="link" to="/"><img width="200px;" src={logo} alt="loading..."/></Link>
             <div className="links">
                 {renderRegisterButton()}
             </div>
