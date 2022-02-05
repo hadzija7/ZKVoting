@@ -72,12 +72,12 @@ const Register = () => {
                         </Link>
                     </h3>
                 </div>
-                <div style={{marginBottom: "3em"}}>
+                <div style={{marginBottom: "2em"}}>
                     <h2 style={{fontStyle:"italic", color: "gray", marginBottom: "0.5em"}}>Start Voting</h2>
                     <button onClick={handleRegisterClick} className="baseButton">Register</button>
                     <h2 style={{color: "red", marginTop: "1em"}}>{connectWallet}</h2>
                 </div>
-                {pending && <div style={{marginTop: "2em"}}>
+                {pending && <div style={{marginTop: "2em", marginBottom: "2em"}}>
                     <Spinner animation="border" />
                 </div>}
             </div>

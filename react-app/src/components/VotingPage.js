@@ -164,6 +164,9 @@ const VotingPage = () => {
                 const receipt = await tx.wait()
                 console.log("Voting result: ", receipt);
                 setProofStatus("Successful vote");
+                getSignalsForNullifier(id).then((result) => {
+                    setVotesPerProposal(result);
+                });
             } catch (error){
                 console.log("Internal error happened: ", error);
                 window.alert(error.data.message);

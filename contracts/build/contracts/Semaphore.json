@@ -36964,10 +36964,10 @@
       "links": {
         "PoseidonT3": "0xf8db650D511e67600c74101BC8B84c6a77104b79",
         "PoseidonT6": "0xB7C215BBF19D730BC340F1E343e94a2972703926",
-        "MiMC": "0xFB7C56611042e7Ee5cF93Ca37Ad24c112D27a240"
+        "MiMC": "0x6F40598579775Fbe09352D0e95D385891Db32043"
       },
-      "address": "0x882981bE8E141C4e8ad4f7e9501eD953d380B193",
-      "transactionHash": "0x6330f852a5d083c5f04cc93c9c48a78aaf6d7b96ad17766b9350df759ed32e0f"
+      "address": "0xBF8A992413A265E591DCaE068aB9c3D1dfEB30a5",
+      "transactionHash": "0xc54753131d29621faf0367330f70b489e15d6db2493280a60610a922cfc26c2c"
     },
     "1643217369555": {
       "events": {
@@ -37250,7 +37250,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-04T15:21:20.401Z",
+  "updatedAt": "2022-02-05T06:07:37.635Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -390,14 +390,14 @@
     "absolutePath": "project:/contracts/MiMC.sol",
     "exportedSymbols": {
       "MiMC": [
-        303
+        331
       ]
     },
-    "id": 304,
+    "id": 332,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 290,
+        "id": 318,
         "literals": [
           "solidity",
           "^",
@@ -413,38 +413,38 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 303,
+        "id": 331,
         "linearizedBaseContracts": [
-          303
+          331
         ],
         "name": "MiMC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 301,
+              "id": 329,
               "nodeType": "Block",
               "src": "1157:2:1",
               "statements": []
             },
             "functionSelector": "f47d33b5",
-            "id": 302,
+            "id": 330,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "MiMCSponge",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 295,
+              "id": 323,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 292,
+                  "id": 320,
                   "mutability": "mutable",
                   "name": "in_xL",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1066:13:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -453,7 +453,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 291,
+                    "id": 319,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1066:7:1",
@@ -466,11 +466,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 294,
+                  "id": 322,
                   "mutability": "mutable",
                   "name": "in_xR",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1081:13:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -479,7 +479,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 293,
+                    "id": 321,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1081:7:1",
@@ -494,16 +494,16 @@
               "src": "1065:30:1"
             },
             "returnParameters": {
-              "id": 300,
+              "id": 328,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 297,
+                  "id": 325,
                   "mutability": "mutable",
                   "name": "xL",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1133:10:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -512,7 +512,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 296,
+                    "id": 324,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1133:7:1",
@@ -525,11 +525,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 299,
+                  "id": 327,
                   "mutability": "mutable",
                   "name": "xR",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1145:10:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -538,7 +538,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 298,
+                    "id": 326,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1145:7:1",
@@ -552,14 +552,14 @@
               ],
               "src": "1132:24:1"
             },
-            "scope": 303,
+            "scope": 331,
             "src": "1046:113:1",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 304,
+        "scope": 332,
         "src": "908:253:1"
       }
     ],
@@ -569,14 +569,14 @@
     "absolutePath": "project:/contracts/MiMC.sol",
     "exportedSymbols": {
       "MiMC": [
-        303
+        331
       ]
     },
-    "id": 304,
+    "id": 332,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 290,
+        "id": 318,
         "literals": [
           "solidity",
           "^",
@@ -592,38 +592,38 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 303,
+        "id": 331,
         "linearizedBaseContracts": [
-          303
+          331
         ],
         "name": "MiMC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 301,
+              "id": 329,
               "nodeType": "Block",
               "src": "1157:2:1",
               "statements": []
             },
             "functionSelector": "f47d33b5",
-            "id": 302,
+            "id": 330,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "MiMCSponge",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 295,
+              "id": 323,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 292,
+                  "id": 320,
                   "mutability": "mutable",
                   "name": "in_xL",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1066:13:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -632,7 +632,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 291,
+                    "id": 319,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1066:7:1",
@@ -645,11 +645,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 294,
+                  "id": 322,
                   "mutability": "mutable",
                   "name": "in_xR",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1081:13:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -658,7 +658,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 293,
+                    "id": 321,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1081:7:1",
@@ -673,16 +673,16 @@
               "src": "1065:30:1"
             },
             "returnParameters": {
-              "id": 300,
+              "id": 328,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 297,
+                  "id": 325,
                   "mutability": "mutable",
                   "name": "xL",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1133:10:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -691,7 +691,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 296,
+                    "id": 324,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1133:7:1",
@@ -704,11 +704,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 299,
+                  "id": 327,
                   "mutability": "mutable",
                   "name": "xR",
                   "nodeType": "VariableDeclaration",
-                  "scope": 302,
+                  "scope": 330,
                   "src": "1145:10:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -717,7 +717,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 298,
+                    "id": 326,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1145:7:1",
@@ -731,14 +731,14 @@
               ],
               "src": "1132:24:1"
             },
-            "scope": 303,
+            "scope": 331,
             "src": "1046:113:1",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 304,
+        "scope": 332,
         "src": "908:253:1"
       }
     ],
@@ -752,12 +752,12 @@
     "1666700000": {
       "events": {},
       "links": {},
-      "address": "0xFB7C56611042e7Ee5cF93Ca37Ad24c112D27a240",
-      "transactionHash": "0x7f4d8895265c492085836b3b12ffaea6df72b128147620664de3db6dbb0f5272"
+      "address": "0x6F40598579775Fbe09352D0e95D385891Db32043",
+      "transactionHash": "0xf5c20a107eff6b6dc43b854181f2d44c76da8559b7dc9a64334064ee0d0f61c4"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-04T15:21:20.415Z",
+  "updatedAt": "2022-02-05T06:07:37.655Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
